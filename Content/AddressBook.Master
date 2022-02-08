@@ -1,0 +1,74 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AddressBook.master.cs" Inherits="MultiUserAddressBook.Content.AddressBook" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" 
+    content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="icon" type="image/x-icon" href="~/Content/image/favicon.png">
+    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="~/Content/css/all.min.css" />
+    <asp:ContentPlaceHolder ID="cphHead" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="sticky-top">
+            <nav class="navbar navbar-expand-lg navbar-dark header ps-5">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">
+
+                        <span class="mb-2">AddressBook</span>
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse ms-5" id="navbarColor02">
+                        <ul class="navbar-nav me-auto">
+                            <li class="nav-item">
+                                <asp:HyperLink ID="hlCountry" runat="server" NavigateUrl="~/AdminPanel/Country/CountryList.aspx" CssClass="nav-link">Country</asp:HyperLink>
+                            </li>
+                            <li class="nav-item">
+                                <asp:HyperLink ID="hlState" runat="server" NavigateUrl="~/AdminPanel/State/StateList.aspx" CssClass="nav-link">State</asp:HyperLink>
+                            </li>
+                            <li class="nav-item">
+                                <asp:HyperLink ID="hlCity" runat="server" NavigateUrl="~/AdminPanel/City/CityList.aspx" CssClass="nav-link">City</asp:HyperLink>
+                            </li>
+                            <li class="nav-item">
+                                <asp:HyperLink ID="hlContactCategory" runat="server" NavigateUrl="~/AdminPanel/ContactCategory/ContactCategoryList.aspx" CssClass="nav-link">ContactCategory</asp:HyperLink>
+                            </li>
+                            <li class="nav-item">
+                                <asp:HyperLink ID="hlContact" runat="server" NavigateUrl="~/AdminPanel/Contact/ContactList.aspx" CssClass="nav-link">Contact</asp:HyperLink>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div class="">
+            <asp:ContentPlaceHolder ID="cphContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <div class="row header2 text-light p-3 mt-5">
+            <p class="text-center m-0">Dhruvil A. Dobariya | 190540107051 | 190540107051@darshan.ac.in</p>
+            <p class="text-center m-0">
+                <asp:HyperLink runat="server" ID="hlLinkedin" CssClass="btn btn-lg text-light" NavigateUrl="https://www.linkedin.com/in/dhruvil-dobariya-240600209/">
+                    <i class="fab fa-linkedin"></i>
+                </asp:HyperLink>
+                <asp:HyperLink runat="server" ID="HyperLink1" CssClass="btn btn-lg text-light" NavigateUrl="https://github.com/DhruvilDobariya">
+                    <i class="fab fa-github"></i>
+                </asp:HyperLink>
+            </p>
+        </div>
+    </form>
+    <script src="/Content/js/bootstrap.bundle.min.js" type="text/javascript"></script>
+    <script src="/Content/js/all.min.js" type="text/javascript"></script>
+</body>
+</html>
