@@ -48,6 +48,11 @@
                                 <asp:HyperLink ID="hlContact" runat="server" NavigateUrl="~/AdminPanel/Contact/ContactList.aspx" CssClass="nav-link">Contact</asp:HyperLink>
                             </li>
                         </ul>
+                        <div>
+                            <asp:LinkButton runat="server" ID="lbtnLogout" CssClass="btn text-light p-0 btn-lg me-3">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </asp:LinkButton>
+                        </div>
                     </div>
                 </div>
             </nav>

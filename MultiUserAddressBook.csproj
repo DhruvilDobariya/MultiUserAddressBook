@@ -71,12 +71,14 @@
     <Content Include="Content\css\all.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
     <Content Include="Content\image\DIET_Logo.svg" />
+    <Content Include="Content\image\dotnet.png" />
     <Content Include="Content\image\favicon.png" />
     <Content Include="Content\image\Microsoft.png" />
     <Content Include="Content\js\all.min.js" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
+    <Content Include="Login.aspx" />
+    <Content Include="Registrastion.aspx" />
     <Content Include="Web.config" />
-    <Content Include="WebForm1.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Content\AddressBook.Master.cs">
@@ -86,13 +88,20 @@
     <Compile Include="Content\AddressBook.Master.designer.cs">
       <DependentUpon>AddressBook.Master</DependentUpon>
     </Compile>
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="WebForm1.aspx.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="WebForm1.aspx.designer.cs">
-      <DependentUpon>WebForm1.aspx</DependentUpon>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Registrastion.aspx.cs">
+      <DependentUpon>Registrastion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Registrastion.aspx.designer.cs">
+      <DependentUpon>Registrastion.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
