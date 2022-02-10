@@ -49,8 +49,14 @@
                             </li>
                         </ul>
                         <div>
-                            <asp:LinkButton runat="server" ID="lbtnLogout" CssClass="btn text-light p-0 btn-lg me-3">
-                                <i class="fas fa-sign-out-alt"></i>
+                            <asp:LinkButton runat="server" ID="lbtnLogin" CssClass="btn text-light p-0 btn-lg me-3 d-flex align-items-end">
+                                <asp:Label runat="server" CssClass="me-2" ID="lblDisplayName"></asp:Label>
+                                <i class="fas fa-user-circle fs-3"></i>
+                            </asp:LinkButton>
+                        </div>
+                        <div>
+                            <asp:LinkButton runat="server" ID="lblLogout" CssClass="btn text-light p-0 btn-lg me-3 d-flex align-items-end" OnClick="lblLogout_Click">
+                                | &nbsp;Log out
                             </asp:LinkButton>
                         </div>
                     </div>

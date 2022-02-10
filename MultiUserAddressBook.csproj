@@ -75,6 +75,7 @@
     <Content Include="AdminPanel\Contact\ContactList.aspx" />
     <Content Include="AdminPanel\Country\CountryAddEdit.aspx" />
     <Content Include="AdminPanel\Country\CountryList.aspx" />
+    <Content Include="AdminPanel\Home.aspx" />
     <Content Include="AdminPanel\State\StateAddEdit.aspx" />
     <Content Include="AdminPanel\State\StateList.aspx" />
     <Content Include="App_Themes\Main\style.css" />
@@ -146,6 +147,13 @@
     </Compile>
     <Compile Include="AdminPanel\Country\CountryList.aspx.designer.cs">
       <DependentUpon>CountryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\Home.aspx.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\Home.aspx.designer.cs">
+      <DependentUpon>Home.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminPanel\State\StateAddEdit.aspx.cs">
       <DependentUpon>StateAddEdit.aspx</DependentUpon>

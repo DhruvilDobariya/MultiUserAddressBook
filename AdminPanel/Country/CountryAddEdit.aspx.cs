@@ -78,7 +78,7 @@ namespace MultiUserAddressBook.AdminPanel.Country
                 if (Request.QueryString["CountryID"] != null)
                 {
                     #region Update record
-                    objCmd.CommandText = "PR_Country_UpdateByPK";
+                    objCmd.CommandText = "PR_Country_UpdateByPKUserID";
                     objCmd.Parameters.AddWithValue("@CountryID", Convert.ToInt32(Request.QueryString["CountryID"]));
                     objCmd.ExecuteNonQuery();
                     Response.Redirect("~/AdminPanel/Country/CountryList.aspx");
@@ -87,7 +87,7 @@ namespace MultiUserAddressBook.AdminPanel.Country
                 else
                 {
                     #region Add record
-                    objCmd.CommandText = "PR_Country_Insert";
+                    objCmd.CommandText = "PR_Country_InsertUserID";
                     objCmd.ExecuteNonQuery();
                     lblMsg.Text = "Country Added Successfully";
                     txtCountry.Text = "";
@@ -132,7 +132,7 @@ namespace MultiUserAddressBook.AdminPanel.Country
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_Country_SelectByPK", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_Country_SelectByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@CountryID", Id);
                 SqlDataReader objSDR = objCmd.ExecuteReader();

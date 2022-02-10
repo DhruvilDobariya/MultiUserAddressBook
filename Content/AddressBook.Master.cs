@@ -11,6 +11,18 @@ namespace MultiUserAddressBook.Content
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Page.IsPostBack)
+            {
+                if(Session["UserID"] == null)
+                {
+                    //Response.Redirect("~/Login.aspx");
+                }
+                lblDisplayName.Text = "Hi " + Session["DisplayName"].ToString();
+            }
+            ActiveNavBar();
+        }
+        private void ActiveNavBar()
+        {
             string path = HttpContext.Current.Request.Url.AbsolutePath;
             string[] str = path.Split('/');
 
@@ -32,6 +44,12 @@ namespace MultiUserAddressBook.Content
                     hlContact.CssClass = "nav-link active";
                     break;
             }
+        }
+
+        protected void lblLogout_Click(object sender, EventArgs e)
+        {
+            Session.Clear();
+            Response.Redirect("~/Login.aspx");
         }
     }
 }

@@ -36,17 +36,20 @@
 					<p>Sign in with your id</p>
 				</div>
 				<div class="form-floating">
-					<input type="text" name="Username" class="form-control" id="floatingInput" placeholder="name@example.com">
+					<asp:TextBox ID="txtUserName" runat="server" CssClass="form-control" placeholder="name@example.com"></asp:TextBox>
 					<label for="floatingInput">Username</label>
 				</div>
 				<div class="form-floating">
-					<input type="password" name="Password" class="form-control" id="floatingPassword" placeholder="Password">
+					<asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="Password"></asp:TextBox>
 					<label for="floatingPassword">Password</label>
 				</div>
 				
-				<a class="w-100 btn btn-lg btn-danger my-3" type="submit">Sign in</a>
+				<asp:Button runat="server" ID="btnSubmit" CssClass="w-100 btn btn-danger btn-lg my-3" Text="Sign in" OnClick="btnSubmit_Click"/>
 				<div class="">
 					<asp:HyperLink runat="server" ID="hlSignup" CssClass="link mb-5" NavigateUrl="~/Registrastion.aspx">Sign Up</asp:HyperLink>
+				</div>
+				<div class="text-center">
+					<asp:Label runat="server" ID="lblMsg" CssClass="text-danger"></asp:Label>
 				</div>
 			</form>
 		</main>

@@ -37,7 +37,7 @@ namespace MultiUserAddressBook.AdminPanel.Country
                 SqlCommand objCmd = new SqlCommand();
                 objCmd.Connection = objConn;
                 objCmd.CommandType = CommandType.StoredProcedure;
-                objCmd.CommandText = "PR_Country_SelectAll";
+                objCmd.CommandText = "PR_Country_SelectAllUserID";
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 gvCountry.DataSource = objSDR;
                 gvCountry.DataBind();
@@ -82,7 +82,7 @@ namespace MultiUserAddressBook.AdminPanel.Country
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_Country_DeleteByPK", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_Country_DeleteByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@CountryID", Id);
                 objCmd.ExecuteNonQuery();
