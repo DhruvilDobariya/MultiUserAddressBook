@@ -58,7 +58,7 @@
                         <asp:CompareValidator ID="cvRetypePassword" runat="server" ErrorMessage="Password and Retype Password Not Same" ControlToCompare="txtPassword" ControlToValidate="txtRetypePassword" Display="Dynamic" ForeColor="Red"></asp:CompareValidator>
                     </div>
                     <div>
-                        <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-success mx-1 my-2" Text="Submit"/>
+                        <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-success mx-1 my-2" Text="Submit" OnClick="btnSubmit_Click"/>
                         <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-dark mx-1 my-2" NavigateUrl="~/Login.aspx">Back</asp:HyperLink>
                         <asp:Label ID="lblMsg" runat="server"></asp:Label>
                     </div>
