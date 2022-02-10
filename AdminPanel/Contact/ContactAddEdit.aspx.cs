@@ -45,8 +45,10 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                     objConn.Open();
 
                 #region Create Command and Bind Data
-                SqlCommand objCmd = new SqlCommand("PR_ContactCategory_SelectForDropDownList", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_ContactCategory_SelectForDropDownListUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 if (objSDR.HasRows)
                 {
@@ -86,8 +88,10 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                     objConn.Open();
 
                 #region Create Command and Bind Data
-                SqlCommand objCmd = new SqlCommand("PR_City_SelectForDropDownList", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_City_SelectForDropDownListUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 if (objSDR.HasRows)
                 {
@@ -127,8 +131,10 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                     objConn.Open();
 
                 #region Create Command and Bind Data
-                SqlCommand objCmd = new SqlCommand("PR_State_SelectForDropDownList", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_State_SelectForDropDownListUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 if (objSDR.HasRows)
                 {
@@ -167,8 +173,10 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                     objConn.Open();
 
                 #region Create Command and Bind Data
-                SqlCommand objCmd = new SqlCommand("PR_Country_SelectForDropDownList", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_Country_SelectForDropDownListUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
 
                 if (objSDR.HasRows)
@@ -260,44 +268,44 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                 lblMsg.Text = "</br> Please : </br>" + temp;
                 return;
             }*/
-            if (txtContact.Text.Trim() != "")
+            if (txtContact.Text.Trim() == "")
             {
-                temp += "<li>" + lblContact + "</li>";
+                temp += "<li>" + lblContact.Text.Trim() + "</li>";
                 flag = true;
             }
-            if (ddContactCategory.SelectedValue != "-1")
+            if (ddContactCategory.SelectedValue == "-1")
             {
-                temp += "<li>" + lblContactCategory + "</li>"; ;
+                temp += "<li>" + lblContactCategory.Text.Trim() + "</li>"; ;
                 flag = true;
             }
-            if (ddCity.SelectedValue != "-1")
+            if (ddCity.SelectedValue == "-1")
             {
-                temp += "<li>" + lblCity + "</li>";
+                temp += "<li>" + lblCity.Text.Trim() + "</li>";
                 flag = true;
             }
-            if (ddState.SelectedValue != "-1")
+            if (ddState.SelectedValue == "-1")
             {
-                temp += "<li>" + lblState + "</li>";
+                temp += "<li>" + lblState.Text.Trim() + "</li>";
                 flag = true;
             }
-            if (ddCountry.SelectedValue != "-1")
+            if (ddCountry.SelectedValue == "-1")
             {
-                temp += "<li>" + lblCountry + "</li>";
+                temp += "<li>" + lblCountry.Text.Trim() + "</li>";
                 flag = true;
             }
-            if (txtContactNo.Text.Trim() != "")
+            if (txtContactNo.Text.Trim() == "")
             {
-                temp += "<li>" + lblContactNo + "</li>";
+                temp += "<li>" + lblContactNo.Text.Trim() + "</li>";
                 flag = true;
             }
-            if (txtEmail.Text.Trim() != "")
+            if (txtEmail.Text.Trim() == "")
             {
-                temp += "<li>" + lblEmail + "</li>";
+                temp += "<li>" + lblEmail.Text.Trim() + "</li>";
                 flag = true;
             }
-            if (txtAddress.Text.Trim() != "")
+            if (txtAddress.Text.Trim() == "")
             {
-                temp += "<li>" + lblAddress + "</li>";
+                temp += "<li>" + lblAddress.Text.Trim() + "</li>";
                 flag = true;
             }
 
@@ -363,13 +371,15 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                 objCmd.Parameters.AddWithValue("@FacebookID", strFacebook);
                 objCmd.Parameters.AddWithValue("@LinkedInID", strLinkedin);
                 objCmd.Parameters.AddWithValue("@Address", strAddress);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 #endregion Create Command and Set Parameters
 
 
                 if (Request.QueryString["ContactID"] != null)
                 {
                     #region Update record
-                    objCmd.CommandText = "PR_Contact_UpdateByPK";
+                    objCmd.CommandText = "PR_Contact_UpdateByPKUserID";
                     objCmd.Parameters.AddWithValue("@ContactID", Convert.ToString(Request.QueryString["ContactID"]));
                     objCmd.ExecuteNonQuery();
                     Response.Redirect("~/AdminPanel/Contact/ContactList.aspx");
@@ -378,7 +388,7 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                 else
                 {
                     #region Add record
-                    objCmd.CommandText = "PR_Contact_Insert";
+                    objCmd.CommandText = "PR_Contact_InsertUserID";
                     objCmd.ExecuteNonQuery();
                     txtContact.Text = txtContactNo.Text = txtWhatsappNo.Text = txtBirthDate.Text = txtEmail.Text = txtAge.Text = txtBloodGroup.Text = txtFecebook.Text = txtLinkedin.Text = txtAddress.Text = "";
                     ddContactCategory.SelectedValue = ddCity.SelectedValue = ddState.SelectedValue = ddCountry.SelectedValue = "-1";
@@ -414,9 +424,11 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_Contact_SelectByPK", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_Contact_SelectByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@ContactID", Id);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 #endregion Create Command and Set Parameters
 

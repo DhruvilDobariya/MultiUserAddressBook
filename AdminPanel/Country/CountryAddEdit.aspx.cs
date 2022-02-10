@@ -73,6 +73,8 @@ namespace MultiUserAddressBook.AdminPanel.Country
 
                 objCmd.Parameters.AddWithValue("@CountryName", CountryName);
                 objCmd.Parameters.AddWithValue("@CountryCode", CountryCode);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 #endregion Create Command and Set Parameters
 
                 if (Request.QueryString["CountryID"] != null)
@@ -102,7 +104,7 @@ namespace MultiUserAddressBook.AdminPanel.Country
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Violation of UNIQUE KEY constraint 'IX_Country'. Cannot insert duplicate key in object 'dbo.Country'."))
+                if (ex.Message.Contains("Violation of UNIQUE KEY constraint 'UK_Country_CountryName_UserID'. Cannot insert duplicate key in object 'dbo.Country'."))
                 {
                     lblMsg.Text = "Country alrady exist!";
                 }
@@ -135,6 +137,8 @@ namespace MultiUserAddressBook.AdminPanel.Country
                 SqlCommand objCmd = new SqlCommand("PR_Country_SelectByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@CountryID", Id);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 #endregion Create Command and Set Parameters
                 #region Get data and set data

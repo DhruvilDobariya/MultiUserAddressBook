@@ -39,8 +39,10 @@ namespace MultiUserAddressBook.AdminPanel.City
                 if (objConn.State != ConnectionState.Open)
                     objConn.Open();
 
-                SqlCommand objCmd = new SqlCommand("PR_State_SelectForDropDownList", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_State_SelectForDropDownListUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 if (objSDR.HasRows)
                 {
@@ -116,12 +118,14 @@ namespace MultiUserAddressBook.AdminPanel.City
                 objCmd.Parameters.AddWithValue("@StateID", strStateID);
                 objCmd.Parameters.AddWithValue("@PinCode", strPinCode);
                 objCmd.Parameters.AddWithValue("@STDCode", StrSTDCode);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 #endregion Create Command and Set Parameters
 
                 if (Request.QueryString["CityID"] != null)
                 {
                     #region Update record
-                    objCmd.CommandText = "PR_City_UpdateByPK";
+                    objCmd.CommandText = "PR_City_UpdateByPKUserID";
                     objCmd.Parameters.AddWithValue("@CityID", Convert.ToString(Request.QueryString["CityID"]));
                     objCmd.ExecuteNonQuery();
                     Response.Redirect("~/AdminPanel/City/CityList.aspx");
@@ -130,7 +134,7 @@ namespace MultiUserAddressBook.AdminPanel.City
                 else
                 {
                     #region Add record
-                    objCmd.CommandText = "PR_City_Insert";
+                    objCmd.CommandText = "PR_City_InsertUserID";
                     objCmd.ExecuteNonQuery();
                     lblMsg.Text = "City Added Successfully";
                     txtCity.Text = txtPin.Text = txtSTD.Text = "";
@@ -173,9 +177,11 @@ namespace MultiUserAddressBook.AdminPanel.City
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_City_SelectByPK", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_City_SelectByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@CityID", Id);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 #endregion Create Command and Set Parameters
                 #region Get data and set data

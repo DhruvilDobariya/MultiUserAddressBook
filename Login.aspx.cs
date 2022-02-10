@@ -73,7 +73,7 @@ namespace MultiUserAddressBook
                     while (objSDR.Read())
                     {
                         if (!objSDR["UserID"].Equals(DBNull.Value))
-                            Session["UserID"] = objSDR["UserName"].ToString().Trim();
+                            Session["UserID"] = objSDR["UserID"].ToString().Trim();
                         if (!objSDR["DisplayName"].Equals(DBNull.Value))
                             Session["DisplayName"] = objSDR["DisplayName"].ToString().Trim();
                         break;

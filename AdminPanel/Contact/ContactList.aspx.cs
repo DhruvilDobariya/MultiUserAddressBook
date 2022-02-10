@@ -38,7 +38,9 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                 SqlCommand objCmd = new SqlCommand();
                 objCmd.Connection = objConn;
                 objCmd.CommandType = CommandType.StoredProcedure;
-                objCmd.CommandText = "PR_Contact_SelectAll";
+                objCmd.CommandText = "PR_Contact_SelectAllUserID";
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 gvContact.DataSource = objSDR;
                 gvContact.DataBind();
@@ -84,9 +86,11 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_Contact_DeleteByPK", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_Contact_DeleteByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@ContactID", Id);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 objCmd.ExecuteNonQuery();
                 lblMsg.Text = "Contact Deleted Successfully!";
                 #endregion Create Command and Set Parameters

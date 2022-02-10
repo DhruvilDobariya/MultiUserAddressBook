@@ -40,9 +40,13 @@ namespace MultiUserAddressBook.AdminPanel.State
                 if (objConn.State != ConnectionState.Open)
                     objConn.Open();
 
-                SqlCommand objCmd = new SqlCommand("PR_Country_SelectForDropDownList", objConn);
+                #region Create Command and Set Parameters
+                SqlCommand objCmd = new SqlCommand("PR_Country_SelectForDropDownListUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
+                #endregion Create Command and Set Parameters
 
                 if (objSDR.HasRows)
                 {
@@ -137,12 +141,14 @@ namespace MultiUserAddressBook.AdminPanel.State
                 objCmd.Parameters.AddWithValue("@StateName", strStateName);
                 objCmd.Parameters.AddWithValue("@StateCode", strStateCode);
                 objCmd.Parameters.AddWithValue("@CountryID", strCountryID);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 #endregion Create Command and Set Parameters
 
                 if (Request.QueryString["StateID"] != null)
                 {
                     #region Update record
-                    objCmd.CommandText = "PR_State_UpdateByPK";
+                    objCmd.CommandText = "PR_State_UpdateByPKUserID";
                     objCmd.Parameters.AddWithValue("@StateID", Convert.ToString(Request.QueryString["StateID"]));
                     objCmd.ExecuteNonQuery();
                     Response.Redirect("~/AdminPanel/State/StateList.aspx");
@@ -151,7 +157,7 @@ namespace MultiUserAddressBook.AdminPanel.State
                 else
                 {
                     #region Add record
-                    objCmd.CommandText = "PR_State_Insert";
+                    objCmd.CommandText = "PR_State_InsertUserID";
                     objCmd.ExecuteNonQuery();
                     lblMsg.Text = "State Added Successfully";
                     txtState.Text = txtCode.Text = "";
@@ -196,9 +202,11 @@ namespace MultiUserAddressBook.AdminPanel.State
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_State_SelectByPK", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_State_SelectByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@StateID", Id);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 #endregion Create Command and Set Parameters
 

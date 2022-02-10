@@ -38,7 +38,9 @@ namespace MultiUserAddressBook.AdminPanel.ContactCategory
                 SqlCommand objCmd = new SqlCommand();
                 objCmd.Connection = objConn;
                 objCmd.CommandType = CommandType.StoredProcedure;
-                objCmd.CommandText = "PR_ContactCategory_SelectAll";
+                objCmd.CommandText = "PR_ContactCategory_SelectAllUserID";
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 gvContactCategory.DataSource = objSDR;
                 gvContactCategory.DataBind();
@@ -84,9 +86,11 @@ namespace MultiUserAddressBook.AdminPanel.ContactCategory
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_ContactCategory_DeleteByPK", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_ContactCategory_DeleteByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@ContactCategoryId", Id);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 objCmd.ExecuteNonQuery();
                 lblMsg.Text = "Contact Category Deleted Successfully!";
                 #endregion Create Command and Set Parameters
@@ -96,7 +100,14 @@ namespace MultiUserAddressBook.AdminPanel.ContactCategory
             }
             catch (Exception ex)
             {
-                lblMsg.Text = ex.Message;
+                if (ex.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
+                {
+                    lblMsg.Text = "This Contact Category contain some records, So please delete these record, If you want to delete this Contact Category.";
+                }
+                else
+                {
+                    lblMsg.Text = ex.Message;
+                }
             }
             finally
             {

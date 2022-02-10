@@ -38,10 +38,13 @@
 				<div class="form-floating">
 					<asp:TextBox ID="txtUserName" runat="server" CssClass="form-control" placeholder="name@example.com"></asp:TextBox>
 					<label for="floatingInput">Username</label>
+					<asp:RequiredFieldValidator ID="rfvUsername" runat="server" ErrorMessage="Please Enter Username" ControlToValidate="txtUserName" Display="None" ForeColor="Red"></asp:RequiredFieldValidator>
 				</div>
+				
 				<div class="form-floating">
 					<asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="Password"></asp:TextBox>
 					<label for="floatingPassword">Password</label>
+					<asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Please Enter Password" ControlToValidate="txtPassword" Display="None" ForeColor="Red"></asp:RequiredFieldValidator>
 				</div>
 				
 				<asp:Button runat="server" ID="btnSubmit" CssClass="w-100 btn btn-danger btn-lg my-3" Text="Sign in" OnClick="btnSubmit_Click"/>
@@ -50,6 +53,8 @@
 				</div>
 				<div class="text-center">
 					<asp:Label runat="server" ID="lblMsg" CssClass="text-danger"></asp:Label>
+					<asp:ValidationSummary ID="vsSignUp" runat="server" DisplayMode="List" ForeColor="Red" />
+
 				</div>
 			</form>
 		</main>

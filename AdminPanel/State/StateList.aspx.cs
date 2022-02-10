@@ -38,7 +38,9 @@ namespace MultiUserAddressBook.AdminPanel.State
                 SqlCommand objCmd = new SqlCommand();
                 objCmd.Connection = objConn;
                 objCmd.CommandType = CommandType.StoredProcedure;
-                objCmd.CommandText = "PR_State_SelectAll";
+                objCmd.CommandText = "PR_State_SelectAllUserID";
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 gvState.DataSource = objSDR;
                 gvState.DataBind();
@@ -84,9 +86,11 @@ namespace MultiUserAddressBook.AdminPanel.State
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_State_DeleteByPK", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_State_DeleteByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@StateID", Id);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 objCmd.ExecuteNonQuery();
                 lblMsg.Text = "State Deleted Successfully!";
                 #endregion Create Command and Set Parameters
@@ -96,7 +100,14 @@ namespace MultiUserAddressBook.AdminPanel.State
             }
             catch (Exception ex)
             {
-                lblMsg.Text = ex.Message;
+                if (ex.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
+                {
+                    lblMsg.Text = "This State contain some records, So please delete these record, If you want to delete this state.";
+                }
+                else
+                {
+                    lblMsg.Text = ex.Message;
+                }
             }
             finally
             {

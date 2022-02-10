@@ -38,6 +38,8 @@ namespace MultiUserAddressBook.AdminPanel.Country
                 objCmd.Connection = objConn;
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.CommandText = "PR_Country_SelectAllUserID";
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 gvCountry.DataSource = objSDR;
                 gvCountry.DataBind();
@@ -48,7 +50,7 @@ namespace MultiUserAddressBook.AdminPanel.Country
             }
             catch (Exception ex)
             {
-                lblMsg.Text = ex.Message;
+                lblMsg.Text = ex.ToString();
             }
             finally
             {
@@ -85,6 +87,8 @@ namespace MultiUserAddressBook.AdminPanel.Country
                 SqlCommand objCmd = new SqlCommand("PR_Country_DeleteByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@CountryID", Id);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 objCmd.ExecuteNonQuery();
                 #endregion Create Command and Set Parameters
 
@@ -95,7 +99,14 @@ namespace MultiUserAddressBook.AdminPanel.Country
             }
             catch (Exception ex)
             {
-                lblMsg.Text = ex.Message;
+                if(ex.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
+                {
+                    lblMsg.Text = "This Country contain some records, So please delete these record, If you want to delete this country.";
+                }
+                else
+                {
+                    lblMsg.Text = ex.Message;
+                }
             }
             finally
             {

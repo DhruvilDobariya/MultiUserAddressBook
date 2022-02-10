@@ -58,12 +58,14 @@ namespace MultiUserAddressBook.AdminPanel.ContactCategory
                 objCmd.Connection = objConn;
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@ContactCategoryName", strContactCategory);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 #endregion Create Command and Set Parameters
 
                 if (Request.QueryString["ContactCategoryID"] != null)
                 {
                     #region Update record
-                    objCmd.CommandText = "PR_ContactCategory_UpdateByPK";
+                    objCmd.CommandText = "PR_ContactCategory_UpdateByPKUserID";
                     objCmd.Parameters.AddWithValue("@ContactCategoryID", Convert.ToString(Request.QueryString["ContactCategoryID"]));
                     objCmd.ExecuteNonQuery();
                     Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx");
@@ -72,7 +74,7 @@ namespace MultiUserAddressBook.AdminPanel.ContactCategory
                 else
                 {
                     #region Add record
-                    objCmd.CommandText = "PR_ContactCategory_Insert";
+                    objCmd.CommandText = "PR_ContactCategory_InsertUserID";
                     objCmd.ExecuteNonQuery();
                     lblMsg.Text = "Contact Category Added Successfully";
                     txtContactCategory.Text = "";
@@ -116,9 +118,11 @@ namespace MultiUserAddressBook.AdminPanel.ContactCategory
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_ContactCategory_SelectByPK", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_ContactCategory_SelectByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@ContactCategoryID", Id);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 #endregion Create Command and Set Parameters
                 #region Get data and set data

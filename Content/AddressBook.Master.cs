@@ -15,7 +15,7 @@ namespace MultiUserAddressBook.Content
             {
                 if(Session["UserID"] == null)
                 {
-                    //Response.Redirect("~/Login.aspx");
+                    Response.Redirect("~/Login.aspx");
                 }
                 lblDisplayName.Text = "Hi " + Session["DisplayName"].ToString();
             }
