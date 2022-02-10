@@ -11,7 +11,7 @@ namespace MultiUserAddressBook.Content
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            /*string path = HttpContext.Current.Request.Url.AbsolutePath;
+            string path = HttpContext.Current.Request.Url.AbsolutePath;
             string[] str = path.Split('/');
 
             switch (str[2])
@@ -31,7 +31,7 @@ namespace MultiUserAddressBook.Content
                 case "Contact":
                     hlContact.CssClass = "nav-link active";
                     break;
-            }*/
+            }
         }
     }
 }

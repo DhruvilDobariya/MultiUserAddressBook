@@ -67,6 +67,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AdminPanel\City\CityAddEdit.aspx" />
+    <Content Include="AdminPanel\City\CityList.aspx" />
+    <Content Include="AdminPanel\ContactCategory\ContactCategoryAddEdit.aspx" />
+    <Content Include="AdminPanel\ContactCategory\ContactCategoryList.aspx" />
+    <Content Include="AdminPanel\Contact\ContactAddEdit.aspx" />
+    <Content Include="AdminPanel\Contact\ContactList.aspx" />
+    <Content Include="AdminPanel\Country\CountryAddEdit.aspx" />
+    <Content Include="AdminPanel\Country\CountryList.aspx" />
+    <Content Include="AdminPanel\State\StateAddEdit.aspx" />
+    <Content Include="AdminPanel\State\StateList.aspx" />
     <Content Include="App_Themes\Main\style.css" />
     <Content Include="Content\css\all.min.css" />
     <Content Include="Content\css\bootstrap.min.css" />
@@ -81,6 +91,76 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AdminPanel\City\CityAddEdit.aspx.cs">
+      <DependentUpon>CityAddEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\City\CityAddEdit.aspx.designer.cs">
+      <DependentUpon>CityAddEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\City\CityList.aspx.cs">
+      <DependentUpon>CityList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\City\CityList.aspx.designer.cs">
+      <DependentUpon>CityList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\ContactCategory\ContactCategoryAddEdit.aspx.cs">
+      <DependentUpon>ContactCategoryAddEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\ContactCategory\ContactCategoryAddEdit.aspx.designer.cs">
+      <DependentUpon>ContactCategoryAddEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\ContactCategory\ContactCategoryList.aspx.cs">
+      <DependentUpon>ContactCategoryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\ContactCategory\ContactCategoryList.aspx.designer.cs">
+      <DependentUpon>ContactCategoryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\Contact\ContactAddEdit.aspx.cs">
+      <DependentUpon>ContactAddEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\Contact\ContactAddEdit.aspx.designer.cs">
+      <DependentUpon>ContactAddEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\Contact\ContactList.aspx.cs">
+      <DependentUpon>ContactList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\Contact\ContactList.aspx.designer.cs">
+      <DependentUpon>ContactList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\Country\CountryAddEdit.aspx.cs">
+      <DependentUpon>CountryAddEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\Country\CountryAddEdit.aspx.designer.cs">
+      <DependentUpon>CountryAddEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\Country\CountryList.aspx.cs">
+      <DependentUpon>CountryList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\Country\CountryList.aspx.designer.cs">
+      <DependentUpon>CountryList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\State\StateAddEdit.aspx.cs">
+      <DependentUpon>StateAddEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\State\StateAddEdit.aspx.designer.cs">
+      <DependentUpon>StateAddEdit.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\State\StateList.aspx.cs">
+      <DependentUpon>StateList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\State\StateList.aspx.designer.cs">
+      <DependentUpon>StateList.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Content\AddressBook.Master.cs">
       <DependentUpon>AddressBook.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -115,6 +195,7 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
