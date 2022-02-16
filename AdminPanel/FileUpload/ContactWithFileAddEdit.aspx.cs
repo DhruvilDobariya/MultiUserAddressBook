@@ -372,15 +372,7 @@ namespace MultiUserAddressBook.AdminPanel.FileUpload
             #endregion Set Connection
             try
             {
-                if (fuFile.HasFile)
-                {
-                    strFilePath = Server.MapPath("~/UserContent/" + fuFile.FileName.ToString().Trim());
-                    if (!Directory.Exists(Server.MapPath("~/UserContent/")))
-                    {
-                        Directory.CreateDirectory(Server.MapPath("~/UserContent/"));
-                    }
-                    fuFile.SaveAs(Server.MapPath("~/UserContent/" + fuFile.FileName.ToString().Trim()));
-                }
+                
 
                 if (objConn.State != ConnectionState.Open)
                     objConn.Open();
@@ -421,7 +413,14 @@ namespace MultiUserAddressBook.AdminPanel.FileUpload
                 {
                     #region Add record
                     objCmd.CommandText = "PR_Contact_InsertUserID";
-                    objCmd.ExecuteNonQuery();
+                    string Id = objCmd.ExecuteScalar().ToString();
+                    
+                    if (fuFile.HasFile)
+                    {
+
+                        UploadFile(Id);
+                    }
+
                     lblMsg.Text = "Contact Added Successfully";
                     ClearControls();
                     #endregion Add record
@@ -590,6 +589,51 @@ namespace MultiUserAddressBook.AdminPanel.FileUpload
             ddCity.SelectedValue = "-1";
             ddState.SelectedValue = "-1";
             ddCountry.SelectedValue = "-1";
+        }
+
+        private void UploadFile(string Id)
+        {
+            SqlString strFilePath = SqlString.Null;
+
+            #region Set Connection
+            SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
+            #endregion Set Connection
+            try
+            {
+
+
+                if (objConn.State != ConnectionState.Open)
+                    objConn.Open();
+
+                strFilePath = "~/UserContent/" + Id + ".jpg";
+                SqlCommand objCmd = new SqlCommand("PR_Contact_UpdateImagePathByPKUserID", objConn);
+                objCmd.CommandType = CommandType.StoredProcedure;
+                objCmd.Parameters.AddWithValue("@ContactID", Convert.ToInt32(Id));
+                objCmd.Parameters.AddWithValue("@FilePath", strFilePath);
+                if (Session["UserID"] != null)
+                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
+
+                objCmd.ExecuteNonQuery();
+
+                if (!Directory.Exists(Server.MapPath("~/UserContent/")))
+                {
+                    Directory.CreateDirectory(Server.MapPath("~/UserContent/"));
+                }
+                fuFile.SaveAs(Server.MapPath("~/UserContent/" + Id + ".jpg"));
+
+                if (objConn.State == ConnectionState.Open)
+                    objConn.Close();
+
+            }
+            catch (Exception ex)
+            {
+                lblMsg.Text = ex.Message + ex;
+            }
+            finally
+            {
+                if (objConn.State == ConnectionState.Open)
+                    objConn.Close();
+            }
         }
     }
 }

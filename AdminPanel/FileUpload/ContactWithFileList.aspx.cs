@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -63,18 +64,18 @@ namespace MultiUserAddressBook.AdminPanel.FileUpload
         #region GridView RowCommand
         protected void gvContact_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "DeleteRecord")
+            if (e.CommandName == "DeleteImage")
             {
                 if (e.CommandArgument != null)
                 {
-                    DeleteContact(Convert.ToInt32(e.CommandArgument.ToString()));
+                    DeleteContactImage(Convert.ToInt32(e.CommandArgument.ToString()));
                     FillContact();
                 }
             }
         }
         #endregion GridView RowCommand
         #region Delete Contact
-        private void DeleteContact(SqlInt32 Id)
+        private void DeleteContactImage(SqlInt32 Id)
         {
             #region Set Connection
             SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
@@ -86,13 +87,21 @@ namespace MultiUserAddressBook.AdminPanel.FileUpload
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_Contact_DeleteByPKUserID", objConn);
+                SqlCommand objCmd = new SqlCommand("PR_Contact_DeleteImageByPKUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@ContactID", Id);
                 if (Session["UserID"] != null)
                     objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 objCmd.ExecuteNonQuery();
-                lblMsg.Text = "Contact Deleted Successfully!";
+
+                FileInfo file = new FileInfo(Server.MapPath("~/UserContent/" + Id.ToString() + ".jpg"));
+
+                if (file.Exists)
+                {
+                    file.Delete();
+                }
+
+                lblMsg.Text = "Image Deleted Successfully!";
                 #endregion Create Command and Set Parameters
 
                 if (objConn.State == ConnectionState.Open)

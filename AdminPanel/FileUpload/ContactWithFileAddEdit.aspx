@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="CountactWithFileAddEdit.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.FileUpload.CountactWithFileAddEdit" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="ContactWithFileAddEdit.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.FileUpload.CountactWithFileAddEdit" %>
 <asp:Content ID="cHead" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
 <asp:Content ID="cContant" ContentPlaceHolderID="cphContent" runat="Server">
@@ -99,7 +99,7 @@
 
                 <div>
                     <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-success mx-1 my-2" Text="Add" OnClick="btnSubmit_Click" />
-                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-dark mx-1 my-2" NavigateUrl="~/AdminPanel/Contact/ContactList.aspx">Back</asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-dark mx-1 my-2" NavigateUrl="~/AdminPanel/FileUpload/ContactWithFileList.aspx">Back</asp:HyperLink>
                     <asp:Label ID="lblMsg" runat="server"></asp:Label>
                 </div>
             </form>

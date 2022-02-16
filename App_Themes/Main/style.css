@@ -2,7 +2,7 @@ html{
     scroll-behavior: smooth;
 }
 body{
-    /*overflow-x: hidden;*/
+    overflow-x: hidden;
 }
 .header{
     /*background-image: linear-gradient(to right,#333333,#dd1818)*/;
@@ -51,7 +51,7 @@ table th, table td
     background-color: rgb(81,43,212);
     color: white;
 }
-.scrollmanu{
+.scrollmanu {
     overflow: auto;
-    white-space : nowrap;
+    white-space: nowrap;
 }

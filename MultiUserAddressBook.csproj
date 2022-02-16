@@ -77,7 +77,7 @@
     <Content Include="AdminPanel\Country\CountryAddEdit.aspx" />
     <Content Include="AdminPanel\Country\CountryList.aspx" />
     <Content Include="AdminPanel\FileUpload\ContactWithFileList.aspx" />
-    <Content Include="AdminPanel\FileUpload\CountactWithFileAddEdit.aspx" />
+    <Content Include="AdminPanel\FileUpload\ContactWithFileAddEdit.aspx" />
     <Content Include="AdminPanel\Home.aspx" />
     <Content Include="AdminPanel\State\StateAddEdit.aspx" />
     <Content Include="AdminPanel\State\StateList.aspx" />
@@ -166,12 +166,12 @@
     <Compile Include="AdminPanel\FileUpload\ContactWithFileList.aspx.designer.cs">
       <DependentUpon>ContactWithFileList.aspx</DependentUpon>
     </Compile>
-    <Compile Include="AdminPanel\FileUpload\CountactWithFileAddEdit.aspx.cs">
-      <DependentUpon>CountactWithFileAddEdit.aspx</DependentUpon>
+    <Compile Include="AdminPanel\FileUpload\ContactWithFileAddEdit.aspx.cs">
+      <DependentUpon>ContactWithFileAddEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="AdminPanel\FileUpload\CountactWithFileAddEdit.aspx.designer.cs">
-      <DependentUpon>CountactWithFileAddEdit.aspx</DependentUpon>
+    <Compile Include="AdminPanel\FileUpload\ContactWithFileAddEdit.aspx.designer.cs">
+      <DependentUpon>ContactWithFileAddEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminPanel\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
