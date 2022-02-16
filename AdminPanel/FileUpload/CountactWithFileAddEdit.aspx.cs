@@ -5,14 +5,15 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Data.SqlTypes;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace MultiUserAddressBook.AdminPanel.Contact
+namespace MultiUserAddressBook.AdminPanel.FileUpload
 {
-    public partial class ContactAddEdit : System.Web.UI.Page
+    public partial class CountactWithFileAddEdit : System.Web.UI.Page
     {
         #region Page Load
         protected void Page_Load(object sender, EventArgs e)
@@ -94,7 +95,7 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                     objCmd.Parameters.AddWithValue("@StateID", Convert.ToInt32(ddState.SelectedValue));
                 if (Session["UserID"] != null)
                     if (Session["UserID"] != null)
-                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
+                        objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 if (objSDR.HasRows)
                 {
@@ -132,7 +133,7 @@ namespace MultiUserAddressBook.AdminPanel.Contact
             {
                 if (objConn.State != ConnectionState.Open)
                     objConn.Open();
-                
+
                 #region Create Command and Bind Data
                 SqlCommand objCmd = new SqlCommand("PR_State_SelectByCountryIDUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
@@ -371,6 +372,16 @@ namespace MultiUserAddressBook.AdminPanel.Contact
             #endregion Set Connection
             try
             {
+                if (fuFile.HasFile)
+                {
+                    strFilePath = Server.MapPath("~/UserContent/" + fuFile.FileName.ToString().Trim());
+                    if (!Directory.Exists(Server.MapPath("~/UserContent/")))
+                    {
+                        Directory.CreateDirectory(Server.MapPath("~/UserContent/"));
+                    }
+                    fuFile.SaveAs(Server.MapPath("~/UserContent/" + fuFile.FileName.ToString().Trim()));
+                }
+
                 if (objConn.State != ConnectionState.Open)
                     objConn.Open();
 
@@ -487,9 +498,8 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                         }
                         if (!objSDR["BirthDate"].Equals(DBNull.Value))
                         {
-                            DateTime bd = Convert.ToDateTime(objSDR["BirthDate"]);
+                            DateTime bd = Convert.ToDateTime(objSDR["BirthDate"].ToString());
                             txtBirthDate.Text = bd.ToShortDateString();
-                            //txtBirthDate.Text = bd.ToString("mm-dd-yyyy");
                         }
                         if (!objSDR["Email"].Equals(DBNull.Value))
                         {

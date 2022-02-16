@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Registrastion.aspx.cs" Inherits="MultiUserAddressBook.Registrastion" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserAddEdit.aspx.cs" Inherits="MultiUserAddressBook.Registrastion" %>
 
 <!DOCTYPE html>
 
@@ -38,13 +38,14 @@
                     <div>
                         <label class="form-lable m-1">Enter Address</label>
                         <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control m-1" TextMode="MultiLine"></asp:TextBox>
+                        <label class="form-lable m-1">Enter Email</label>
+                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control m-1"></asp:TextBox>
                     </div>
                     <h4 class="mt-3">Login Information</h4>
                     <div>
-                        <label class="form-lable m-1">Enter Email</label>
-                        <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control m-1"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvEmail" runat="server" ErrorMessage="Please Enter Email" ControlToValidate="txtEmail" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                        <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="Please Enter Valid Email" ControlToValidate="txtEmail" Display="Dynamic" ForeColor="Red" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
+                        <label class="form-lable m-1">UserName</label>
+                        <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control m-1"></asp:TextBox>
+                        <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="Please Enter User Name" ControlToValidate="txtUserName" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>
                     <div>
                         <label class="form-lable m-1">Password</label>

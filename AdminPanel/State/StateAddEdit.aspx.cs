@@ -172,7 +172,7 @@ namespace MultiUserAddressBook.AdminPanel.State
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Cannot insert duplicate key row in object 'dbo.State' with unique index 'IX_State'."))
+                if (ex.Message.Contains("Violation of UNIQUE KEY constraint 'UK_State_StateName_UserID'."))
                 {
                     lblMsg.Text = "State alrady exist!";
                 }

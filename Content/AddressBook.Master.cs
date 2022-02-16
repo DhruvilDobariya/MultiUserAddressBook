@@ -46,10 +46,15 @@ namespace MultiUserAddressBook.Content
             }
         }
 
-        protected void lblLogout_Click(object sender, EventArgs e)
+        protected void btnLogout_Click(object sender, EventArgs e)
         {
             Session.Clear();
             Response.Redirect("~/Login.aspx");
+        }
+
+        protected void btnUserUpdateDetail_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/UserAddEdit.aspx?UserID=" + Session["UserID"]);
         }
     }
 }

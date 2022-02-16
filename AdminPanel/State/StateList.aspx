@@ -22,11 +22,6 @@
         </div>
         <asp:GridView ID="gvState" runat="server" CssClass="" AutoGenerateColumns="false" OnRowCommand="gvState_RowCommand">
             <Columns>
-                <asp:BoundField DataField="StateID" HeaderText="Id"/>
-                <asp:BoundField DataField="StateName" HeaderText="Name"/>
-                <asp:BoundField DataField="StateCode" HeaderText="Code"/>
-                <asp:BoundField DataField="CountryName" HeaderText="Country"/>
-                <asp:BoundField DataField="CreationDate" HeaderText="Creation Date"/>
                 <asp:TemplateField HeaderText="Edit">
                     <ItemTemplate>
                         <asp:HyperLink runat="server" ID="hyEdit" NavigateUrl='<%# "~/AdminPanel/State/StateAddEdit.aspx?StateID=" + Eval("StateID").ToString().Trim() %>' CssClass="btn btn-gradient">
@@ -41,6 +36,11 @@
                         </asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:BoundField DataField="StateID" HeaderText="Id"/>
+                <asp:BoundField DataField="StateName" HeaderText="Name"/>
+                <asp:BoundField DataField="StateCode" HeaderText="Code"/>
+                <asp:BoundField DataField="CountryName" HeaderText="Country"/>
+                <asp:BoundField DataField="CreationDate" HeaderText="Creation Date"/>
             </Columns>
         </asp:GridView>
     </div>

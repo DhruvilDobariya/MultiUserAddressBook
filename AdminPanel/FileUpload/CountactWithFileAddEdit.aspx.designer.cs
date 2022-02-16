@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MultiUserAddressBook.AdminPanel.Contact
+namespace MultiUserAddressBook.AdminPanel.FileUpload
 {
 
 
-    public partial class ContactAddEdit
+    public partial class CountactWithFileAddEdit
     {
 
         /// <summary>

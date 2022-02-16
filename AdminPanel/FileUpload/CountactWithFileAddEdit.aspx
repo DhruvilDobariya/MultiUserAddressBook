@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="ContactAddEdit.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.Contact.ContactAddEdit" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="CountactWithFileAddEdit.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.FileUpload.CountactWithFileAddEdit" %>
 <asp:Content ID="cHead" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
 <asp:Content ID="cContant" ContentPlaceHolderID="cphContent" runat="Server">

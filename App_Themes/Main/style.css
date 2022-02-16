@@ -51,3 +51,7 @@ table th, table td
     background-color: rgb(81,43,212);
     color: white;
 }
+.scrollmanu{
+    overflow: auto;
+    white-space : nowrap;
+}

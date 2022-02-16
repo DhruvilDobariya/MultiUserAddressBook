@@ -49,7 +49,7 @@
 				
 				<asp:Button runat="server" ID="btnSubmit" CssClass="w-100 btn btn-danger btn-lg my-3" Text="Sign in" OnClick="btnSubmit_Click"/>
 				<div class="">
-					<asp:HyperLink runat="server" ID="hlSignup" CssClass="link mb-5" NavigateUrl="~/Registrastion.aspx">Sign Up</asp:HyperLink>
+					<asp:HyperLink runat="server" ID="hlSignup" CssClass="link mb-5" NavigateUrl="~/UserAddEdit.aspx">Sign Up</asp:HyperLink>
 				</div>
 				<div class="text-center">
 					<asp:Label runat="server" ID="lblMsg" CssClass="text-danger"></asp:Label>

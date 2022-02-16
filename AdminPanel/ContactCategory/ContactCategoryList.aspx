@@ -22,9 +22,6 @@
         </div>
         <asp:GridView ID="gvContactCategory" runat="server" CssClass="" AutoGenerateColumns="false" OnRowCommand="gvContactCategory_RowCommand">
             <Columns>
-                <asp:BoundField DataField="ContactCategoryID" HeaderText="Id"/>
-                <asp:BoundField DataField="ContactCategoryName" HeaderText="Contact Category"/>
-                <asp:BoundField DataField="CreationDate" HeaderText="Creation Date"/>
                 <asp:TemplateField HeaderText="Edit">
                     <ItemTemplate>
                         <asp:HyperLink runat="server" ID="hlEdit" NavigateUrl='<%# "~/AdminPanel/ContactCategory/ContactCategoryAddEdit.aspx?ContactCategoryID=" + Eval("ContactCategoryID").ToString().Trim() %>' CssClass="btn btn-gradient">
@@ -39,6 +36,9 @@
                         </asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:BoundField DataField="ContactCategoryID" HeaderText="Id"/>
+                <asp:BoundField DataField="ContactCategoryName" HeaderText="Contact Category"/>
+                <asp:BoundField DataField="CreationDate" HeaderText="Creation Date"/>
             </Columns>
         </asp:GridView>
     </div>

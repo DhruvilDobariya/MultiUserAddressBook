@@ -69,12 +69,15 @@
   <ItemGroup>
     <Content Include="AdminPanel\City\CityAddEdit.aspx" />
     <Content Include="AdminPanel\City\CityList.aspx" />
+    <Content Include="AdminPanel\ContactCategoryWiseContact\ContactCategoryWiseContactAddEdit.aspx" />
     <Content Include="AdminPanel\ContactCategory\ContactCategoryAddEdit.aspx" />
     <Content Include="AdminPanel\ContactCategory\ContactCategoryList.aspx" />
     <Content Include="AdminPanel\Contact\ContactAddEdit.aspx" />
     <Content Include="AdminPanel\Contact\ContactList.aspx" />
     <Content Include="AdminPanel\Country\CountryAddEdit.aspx" />
     <Content Include="AdminPanel\Country\CountryList.aspx" />
+    <Content Include="AdminPanel\FileUpload\ContactWithFileList.aspx" />
+    <Content Include="AdminPanel\FileUpload\CountactWithFileAddEdit.aspx" />
     <Content Include="AdminPanel\Home.aspx" />
     <Content Include="AdminPanel\State\StateAddEdit.aspx" />
     <Content Include="AdminPanel\State\StateList.aspx" />
@@ -87,8 +90,9 @@
     <Content Include="Content\image\Microsoft.png" />
     <Content Include="Content\js\all.min.js" />
     <Content Include="Content\js\bootstrap.bundle.min.js" />
+    <Content Include="Content\js\Custom.js" />
     <Content Include="Login.aspx" />
-    <Content Include="Registrastion.aspx" />
+    <Content Include="UserAddEdit.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -105,6 +109,13 @@
     </Compile>
     <Compile Include="AdminPanel\City\CityList.aspx.designer.cs">
       <DependentUpon>CityList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\ContactCategoryWiseContact\ContactCategoryWiseContactAddEdit.aspx.cs">
+      <DependentUpon>ContactCategoryWiseContactAddEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\ContactCategoryWiseContact\ContactCategoryWiseContactAddEdit.aspx.designer.cs">
+      <DependentUpon>ContactCategoryWiseContactAddEdit.aspx</DependentUpon>
     </Compile>
     <Compile Include="AdminPanel\ContactCategory\ContactCategoryAddEdit.aspx.cs">
       <DependentUpon>ContactCategoryAddEdit.aspx</DependentUpon>
@@ -148,6 +159,20 @@
     <Compile Include="AdminPanel\Country\CountryList.aspx.designer.cs">
       <DependentUpon>CountryList.aspx</DependentUpon>
     </Compile>
+    <Compile Include="AdminPanel\FileUpload\ContactWithFileList.aspx.cs">
+      <DependentUpon>ContactWithFileList.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\FileUpload\ContactWithFileList.aspx.designer.cs">
+      <DependentUpon>ContactWithFileList.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="AdminPanel\FileUpload\CountactWithFileAddEdit.aspx.cs">
+      <DependentUpon>CountactWithFileAddEdit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="AdminPanel\FileUpload\CountactWithFileAddEdit.aspx.designer.cs">
+      <DependentUpon>CountactWithFileAddEdit.aspx</DependentUpon>
+    </Compile>
     <Compile Include="AdminPanel\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -184,12 +209,12 @@
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Registrastion.aspx.cs">
-      <DependentUpon>Registrastion.aspx</DependentUpon>
+    <Compile Include="UserAddEdit.aspx.cs">
+      <DependentUpon>UserAddEdit.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Registrastion.aspx.designer.cs">
-      <DependentUpon>Registrastion.aspx</DependentUpon>
+    <Compile Include="UserAddEdit.aspx.designer.cs">
+      <DependentUpon>UserAddEdit.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -203,7 +228,9 @@
       <DependentUpon>Web.config</DependentUpon>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="UserContent\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

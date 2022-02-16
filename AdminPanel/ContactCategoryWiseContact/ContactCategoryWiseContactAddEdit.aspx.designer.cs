@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MultiUserAddressBook.AdminPanel.Contact
+namespace MultiUserAddressBook.AdminPanel.ContactCategoryWiseContact
 {
 
 
-    public partial class ContactAddEdit
+    public partial class ContactCategoryWiseContact
     {
 
         /// <summary>
@@ -51,31 +51,13 @@ namespace MultiUserAddressBook.AdminPanel.Contact
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvContact;
 
         /// <summary>
-        /// lblContactCategory control.
+        /// chklContactCategory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblContactCategory;
-
-        /// <summary>
-        /// ddContactCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddContactCategory;
-
-        /// <summary>
-        /// rfvCotactCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCotactCategory;
+        protected global::System.Web.UI.WebControls.CheckBoxList chklContactCategory;
 
         /// <summary>
         /// lblCountry control.
@@ -310,24 +292,6 @@ namespace MultiUserAddressBook.AdminPanel.Contact
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvAddress;
-
-        /// <summary>
-        /// lblFile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFile;
-
-        /// <summary>
-        /// fuFile control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.FileUpload fuFile;
 
         /// <summary>
         /// btnSubmit control.

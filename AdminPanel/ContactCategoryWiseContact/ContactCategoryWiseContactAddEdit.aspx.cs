@@ -10,30 +10,23 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace MultiUserAddressBook.AdminPanel.Contact
+namespace MultiUserAddressBook.AdminPanel.ContactCategoryWiseContact
 {
-    public partial class ContactAddEdit : System.Web.UI.Page
+    public partial class ContactCategoryWiseContact : System.Web.UI.Page
     {
         #region Page Load
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
-                FillContactCategoryForDropDown();
+
+                FillContactCategoryCheckBoxList();
                 FillCountryDropDown();
-                if (Request.QueryString["ContactID"] != null)
-                {
-                    lblTitle.Text = "Edit Contact";
-                    btnSubmit.Text = "Edit";
-                    FillControls(Convert.ToInt32(Request.QueryString["ContactID"]));
-                    FillStateForDropDown();
-                    FillCityForDropDown();
-                }
             }
         }
         #endregion Page Load
-        #region Fill Contact Category DropDown
-        private void FillContactCategoryForDropDown()
+        #region Fill Contact Category CheckBoxList
+        private void FillContactCategoryCheckBoxList()
         {
             #region Set Connection
             SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
@@ -52,12 +45,11 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 if (objSDR.HasRows)
                 {
-                    ddContactCategory.DataSource = objSDR;
-                    ddContactCategory.DataValueField = "ContactCategoryID";
-                    ddContactCategory.DataTextField = "ContactCategoryName";
-                    ddContactCategory.DataBind();
+                    chklContactCategory.DataSource = objSDR;
+                    chklContactCategory.DataValueField = "ContactCategoryID";
+                    chklContactCategory.DataTextField = "ContactCategoryName";
+                    chklContactCategory.DataBind();
                 }
-                ddContactCategory.Items.Insert(0, new ListItem("Select Contact Category", "-1"));
                 #endregion Create Command and Bind Data
 
                 if (objConn.State == ConnectionState.Open)
@@ -72,9 +64,8 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                 if (objConn.State == ConnectionState.Open)
                     objConn.Close();
             }
-
         }
-        #endregion Fill Contact Category DropDown
+        #endregion Fill Contact Category CheckBoxList
         #region Fill City DropDown
         private void FillCityForDropDown()
         {
@@ -87,6 +78,7 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                 if (objConn.State != ConnectionState.Open)
                     objConn.Open();
 
+                
                 #region Create Command and Bind Data
                 SqlCommand objCmd = new SqlCommand("PR_City_SelectByStateIDUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
@@ -94,7 +86,7 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                     objCmd.Parameters.AddWithValue("@StateID", Convert.ToInt32(ddState.SelectedValue));
                 if (Session["UserID"] != null)
                     if (Session["UserID"] != null)
-                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
+                        objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 SqlDataReader objSDR = objCmd.ExecuteReader();
                 if (objSDR.HasRows)
                 {
@@ -132,7 +124,7 @@ namespace MultiUserAddressBook.AdminPanel.Contact
             {
                 if (objConn.State != ConnectionState.Open)
                     objConn.Open();
-                
+
                 #region Create Command and Bind Data
                 SqlCommand objCmd = new SqlCommand("PR_State_SelectByCountryIDUserID", objConn);
                 objCmd.CommandType = CommandType.StoredProcedure;
@@ -215,7 +207,6 @@ namespace MultiUserAddressBook.AdminPanel.Contact
         {
             #region Local Variable
             SqlString strContact = SqlString.Null;
-            SqlInt32 strContactCategoryID = SqlInt32.Null;
             SqlInt32 strCityID = SqlInt32.Null;
             SqlInt32 strStateID = SqlInt32.Null;
             SqlInt32 strCountryID = SqlInt32.Null;
@@ -228,60 +219,16 @@ namespace MultiUserAddressBook.AdminPanel.Contact
             SqlString strLinkedin = SqlString.Null;
             SqlString strFacebook = SqlString.Null;
             SqlString strAddress = SqlString.Null;
-            SqlString strFilePath = SqlString.Null;
 
             bool flag = false;
             int i = 1;
             string temp = "";
             #endregion Local Variable
             #region Server side validaton
-            /* Using Dictionary
-            IDictionary<TextBox, Label> textBoxValidation = new Dictionary<TextBox, Label>()
-            {
-                {txtContact, lblContact },
-                {txtContactNo, lblContactNo },
-                {txtEmail, lblEmail},
-                {txtAddress, lblAddress }
-            };
-            IDictionary<DropDownList, Label> dropDownListValidation = new Dictionary<DropDownList, Label>() 
-            {
-                {ddContactCategory, lblContactCategory },
-                {ddCity, lblCity },
-                {ddState, lblState },
-                {ddCountry, lblCountry }
-            };
-
-            foreach(KeyValuePair<TextBox, Label> pair in textBoxValidation)
-            {   
-                if(pair.Key.Text == "")
-                {
-                    flag = true;
-                    temp += i + ") " + pair.Value.Text + "</br>"; 
-                }
-                i++;
-            }
-            foreach (KeyValuePair<DropDownList, Label> pair in dropDownListValidation)
-            {
-                if (pair.Key.SelectedValue == "-1")
-                {
-                    flag = true;
-                    temp += i + ") " + pair.Value.Text + "</br>";
-                }
-                i++;
-            }
-            if (flag)
-            {
-                lblMsg.Text = "</br> Please : </br>" + temp;
-                return;
-            }*/
+            
             if (txtContact.Text.Trim() == "")
             {
                 temp += "<li>" + lblContact.Text.Trim() + "</li>";
-                flag = true;
-            }
-            if (ddContactCategory.SelectedValue == "-1")
-            {
-                temp += "<li>" + lblContactCategory.Text.Trim() + "</li>"; ;
                 flag = true;
             }
             if (ddCity.SelectedValue == "-1")
@@ -325,46 +272,30 @@ namespace MultiUserAddressBook.AdminPanel.Contact
             #region Set local variable
             if (txtContact.Text.Trim() != "")
                 strContact = txtContact.Text.Trim();
-
-            if (ddContactCategory.SelectedValue != "-1")
-                strContactCategoryID = Convert.ToInt32(ddContactCategory.SelectedValue);
-
             if (ddCity.SelectedValue != "-1")
                 strCityID = Convert.ToInt32(ddCity.SelectedValue);
-
             if (ddState.SelectedValue != "-1")
                 strStateID = Convert.ToInt32(ddState.SelectedValue);
-
             if (ddCountry.SelectedValue != "-1")
                 strCountryID = Convert.ToInt32(ddCountry.SelectedValue);
-
             if (txtContactNo.Text.Trim() != "")
                 strContactNo = txtContactNo.Text.Trim();
-
             if (txtWhatsappNo.Text.Trim() != "")
                 strWhatsappNo = txtWhatsappNo.Text.Trim();
-
             if (txtBirthDate.Text.Trim() != "")
                 strBirthDate = Convert.ToDateTime(txtBirthDate.Text.Trim());
-
             if (txtEmail.Text.Trim() != "")
                 strEmil = txtEmail.Text.Trim();
-
             if (txtAge.Text.Trim() != "")
                 strAge = Convert.ToInt32(txtAge.Text.Trim());
-
             if (txtBloodGroup.Text.Trim() != "")
                 strBloodGroup = txtBloodGroup.Text.Trim();
-
             if (txtFecebook.Text.Trim() != "")
                 strFacebook = txtFecebook.Text.Trim();
-
             if (txtLinkedin.Text.Trim() != "")
                 strLinkedin = txtLinkedin.Text.Trim();
-
             if (txtAddress.Text.Trim() != "")
                 strAddress = txtAddress.Text.Trim();
-
             #endregion Set local variable
             #region Set Connection
             SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
@@ -378,7 +309,6 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                 SqlCommand objCmd = objConn.CreateCommand();
                 objCmd.CommandType = CommandType.StoredProcedure;
                 objCmd.Parameters.AddWithValue("@ContactName", strContact);
-                objCmd.Parameters.AddWithValue("@ContactCategoryID", strContactCategoryID);
                 objCmd.Parameters.AddWithValue("@CityID", strCityID);
                 objCmd.Parameters.AddWithValue("@StateID", strStateID);
                 objCmd.Parameters.AddWithValue("@CountryID", strCountryID);
@@ -391,30 +321,18 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                 objCmd.Parameters.AddWithValue("@FacebookID", strFacebook);
                 objCmd.Parameters.AddWithValue("@LinkedInID", strLinkedin);
                 objCmd.Parameters.AddWithValue("@Address", strAddress);
-                objCmd.Parameters.AddWithValue("@FilePath", strFilePath);
                 if (Session["UserID"] != null)
                     objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 #endregion Create Command and Set Parameters
 
 
-                if (Request.QueryString["ContactID"] != null)
-                {
-                    #region Update record
-                    objCmd.CommandText = "PR_Contact_UpdateByPKUserID";
-                    objCmd.Parameters.AddWithValue("@ContactID", Convert.ToString(Request.QueryString["ContactID"]));
-                    objCmd.ExecuteNonQuery();
-                    Response.Redirect("~/AdminPanel/Contact/ContactList.aspx");
-                    #endregion Update record
-                }
-                else
-                {
-                    #region Add record
-                    objCmd.CommandText = "PR_Contact_InsertUserID";
-                    objCmd.ExecuteNonQuery();
-                    lblMsg.Text = "Contact Added Successfully";
-                    ClearControls();
-                    #endregion Add record
-                }
+                #region Add record
+                objCmd.CommandText = "PR_ContactWithMultipleContactCategory_InsertUserID";
+                string Id = objCmd.ExecuteScalar().ToString();
+                InsertContactWiseContactCategory(Id);
+                
+                ClearControls();
+                #endregion Add record
 
                 if (objConn.State == ConnectionState.Open)
                     objConn.Close();
@@ -431,103 +349,42 @@ namespace MultiUserAddressBook.AdminPanel.Contact
             }
         }
         #endregion Submit Form
-        #region Fill Controlls
-        private void FillControls(SqlInt32 Id)
+
+        private void InsertContactWiseContactCategory(string ContactID)
         {
             #region Set Connection
             SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
             #endregion Set Connection
-
             try
             {
                 if (objConn.State != ConnectionState.Open)
                     objConn.Open();
 
                 #region Create Command and Set Parameters
-                SqlCommand objCmd = new SqlCommand("PR_Contact_SelectByPKUserID", objConn);
-                objCmd.CommandType = CommandType.StoredProcedure;
-                objCmd.Parameters.AddWithValue("@ContactID", Id);
-                if (Session["UserID"] != null)
-                    objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
-                SqlDataReader objSDR = objCmd.ExecuteReader();
-                #endregion Create Command and Set Parameters
-
-                #region Get data and set data
-                if (objSDR.HasRows)
+                
+                foreach (ListItem item in chklContactCategory.Items)
                 {
-                    while (objSDR.Read())
+                    if (item.Selected)
                     {
-                        if (!objSDR["ContactName"].Equals(DBNull.Value))
-                        {
-                            txtContact.Text = objSDR["ContactName"].ToString();
-                        }
-                        if (!objSDR["ContactCategoryID"].Equals(DBNull.Value))
-                        {
-                            ddContactCategory.SelectedValue = objSDR["ContactCategoryID"].ToString();
-                        }
-                        if (!objSDR["CityID"].Equals(DBNull.Value))
-                        {
-                            ddCity.SelectedValue = objSDR["CityID"].ToString();
-                        }
-                        if (!objSDR["StateID"].Equals(DBNull.Value))
-                        {
-                            ddState.SelectedValue = objSDR["StateID"].ToString();
-                        }
-                        if (!objSDR["CountryID"].Equals(DBNull.Value))
-                        {
-                            ddCountry.SelectedValue = objSDR["CountryID"].ToString();
-                        }
-                        if (!objSDR["ContactNo"].Equals(DBNull.Value))
-                        {
-                            txtContactNo.Text = objSDR["ContactNo"].ToString();
-                        }
-                        if (!objSDR["WhatsappNo"].Equals(DBNull.Value))
-                        {
-                            txtWhatsappNo.Text = objSDR["WhatsappNo"].ToString();
-                        }
-                        if (!objSDR["BirthDate"].Equals(DBNull.Value))
-                        {
-                            DateTime bd = Convert.ToDateTime(objSDR["BirthDate"]);
-                            txtBirthDate.Text = bd.ToShortDateString();
-                            //txtBirthDate.Text = bd.ToString("mm-dd-yyyy");
-                        }
-                        if (!objSDR["Email"].Equals(DBNull.Value))
-                        {
-                            txtEmail.Text = objSDR["Email"].ToString();
-                        }
-                        if (!objSDR["Age"].Equals(DBNull.Value))
-                        {
-                            txtAge.Text = objSDR["Age"].ToString();
-                        }
-                        if (!objSDR["BloodGroup"].Equals(DBNull.Value))
-                        {
-                            txtBloodGroup.Text = objSDR["BloodGroup"].ToString();
-                        }
-                        if (!objSDR["FacebookID"].Equals(DBNull.Value))
-                        {
-                            txtFecebook.Text = objSDR["FacebookID"].ToString();
-                        }
-                        if (!objSDR["LinkedinID"].Equals(DBNull.Value))
-                        {
-                            txtLinkedin.Text = objSDR["LinkedinID"].ToString();
-                        }
-                        if (!objSDR["Address"].Equals(DBNull.Value))
-                        {
-                            txtAddress.Text = objSDR["Address"].ToString();
-                        }
-                        break;
+                        SqlCommand objCmd = new SqlCommand("PR_ContactWiseContactCategory_InsertUserID", objConn);
+                        objCmd.Parameters.AddWithValue("@ContactCategoryID", Convert.ToInt32(item.Value));
+                        if (Session["UserID"] != null)
+                        objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
+                        objCmd.Parameters.AddWithValue("@ContactID", Convert.ToInt32(ContactID));
+                        objCmd.ExecuteNonQuery();
+
                     }
                 }
-                else
-                {
-                    lblMsg.Text = "Contact Not Found!";
-                }
-                #endregion Get data and set data
 
+                #endregion Create Command and Set Parameters
+
+                lblMsg.Text = "Contact Added Successfully";
+                
                 if (objConn.State == ConnectionState.Open)
                     objConn.Close();
+
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 lblMsg.Text = ex.Message;
             }
@@ -537,32 +394,16 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                     objConn.Close();
             }
         }
-        #endregion Fill Controlls
-
         protected void ddState_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddState.SelectedValue != "-1")
-            {
-                ddCity.Items.Clear();
-                FillCityForDropDown();
-            }
-            else
-            {
-                ddCity.Items.Clear();
-            }
+            ddCity.Items.Clear();
+            FillCityForDropDown();
         }
 
         protected void ddCountry_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (ddCountry.SelectedValue != "-1")
-            {
-                ddState.Items.Clear();
-                FillStateForDropDown();
-            }
-            else
-            {
-                ddState.Items.Clear();
-            }
+            ddState.Items.Clear();
+            FillStateForDropDown();
         }
 
         private void ClearControls()
@@ -576,7 +417,6 @@ namespace MultiUserAddressBook.AdminPanel.Contact
             txtBloodGroup.Text = "";
             txtFecebook.Text = "";
             txtLinkedin.Text = txtAddress.Text = "";
-            ddContactCategory.SelectedValue = "-1";
             ddCity.SelectedValue = "-1";
             ddState.SelectedValue = "-1";
             ddCountry.SelectedValue = "-1";

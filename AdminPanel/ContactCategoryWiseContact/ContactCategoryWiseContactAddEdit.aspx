@@ -1,7 +1,8 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="ContactAddEdit.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.Contact.ContactAddEdit" %>
-<asp:Content ID="cHead" ContentPlaceHolderID="cphHead" runat="Server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="ContactCategoryWiseContactAddEdit.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.ContactCategoryWiseContact.ContactCategoryWiseContact" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
-<asp:Content ID="cContant" ContentPlaceHolderID="cphContent" runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="cphContent" runat="Server">
     <div class="container my-5 border p-4">
         <div>
             <h2>
@@ -17,9 +18,8 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-6">
-                        <asp:Label runat="server" ID="lblContactCategory" CssClass="form-lable m-1">Select Contact Category</asp:Label>
-                        <asp:DropDownList ID="ddContactCategory" runat="server" CssClass="form-select"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="rfvCotactCategory" runat="server" ErrorMessage="Please Select Contact Category" ControlToValidate="ddContactCategory" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
+                        <asp:CheckBoxList runat="server" ID="chklContactCategory" CssClass="">
+                        </asp:CheckBoxList>
                     </div>
                     
                     <div class="col-md-6">
@@ -85,18 +85,11 @@
                         <asp:TextBox ID="txtLinkedin" runat="server" CssClass="form-control m-1" TextMode="Url"></asp:TextBox>
                     </div>
                 </div>
-                <div class="row mt-2">
-                    <div class="col-md-6 pe-4">
-                        <asp:Label runat="server" ID="lblAddress" CssClass="form-lable m-1">Enter Your Address</asp:Label>
-                        <asp:TextBox ID="txtAddress" CssClass="form-control m-1 ms-3 me-4" runat="server" Rows="4" TextMode="MultiLine"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvAddress" runat="server" ErrorMessage="Please Enter Address" ControlToValidate="txtAddress" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                    </div>
-                    <div class="col-md-6">
-                        <asp:Label runat="server" ID="lblFile" CssClass="form-lable m-1">Enter Document</asp:Label>
-                        <asp:FileUpload runat="server" ID="fuFile" CssClass="form-control m-1 ms-3 me-4"/>
-                    </div>
+                <div class="row mt-2 pe-4">
+                    <asp:Label runat="server" ID="lblAddress" CssClass="form-lable m-1">Enter Your Address</asp:Label>
+                    <asp:TextBox ID="txtAddress" CssClass="form-control m-1 ms-3 me-4" runat="server" Rows="4" TextMode="MultiLine"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvAddress" runat="server" ErrorMessage="Please Enter Address" ControlToValidate="txtAddress" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
-
                 <div>
                     <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-success mx-1 my-2" Text="Add" OnClick="btnSubmit_Click" />
                     <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-dark mx-1 my-2" NavigateUrl="~/AdminPanel/Contact/ContactList.aspx">Back</asp:HyperLink>

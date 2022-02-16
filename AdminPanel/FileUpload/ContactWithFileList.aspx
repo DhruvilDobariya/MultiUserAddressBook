@@ -1,5 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="ContactList.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.Contact.ContactList" %>
-
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="ContactWithFileList.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.FileUpload.ContactWithFileList" %>
 <asp:Content ID="cHead" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
 <asp:Content ID="cContent" ContentPlaceHolderID="cphContent" runat="Server">
@@ -60,3 +59,4 @@
 
     </div>
 </asp:Content>
+

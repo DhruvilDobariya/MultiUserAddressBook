@@ -148,7 +148,7 @@ namespace MultiUserAddressBook.AdminPanel.City
             }
             catch (Exception ex)
             {
-                if (ex.Message.Contains("Cannot insert duplicate key row in object 'dbo.City' with unique index 'IX_City'."))
+                if (ex.Message.Contains("Violation of UNIQUE KEY constraint 'UK_City_CityName_UserID'. Cannot insert duplicate key in object 'dbo.City'."))
                 {
                     lblMsg.Text = "City alrady exist!";
                 }

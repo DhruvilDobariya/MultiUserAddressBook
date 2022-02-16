@@ -78,6 +78,24 @@ namespace MultiUserAddressBook.Content
         protected global::System.Web.UI.WebControls.HyperLink hlContact;
 
         /// <summary>
+        /// hlContactCategoryWiseContact control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink hlContactCategoryWiseContact;
+
+        /// <summary>
+        /// HyperLink2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HyperLink HyperLink2;
+
+        /// <summary>
         /// lbtnLogin control.
         /// </summary>
         /// <remarks>
@@ -96,13 +114,22 @@ namespace MultiUserAddressBook.Content
         protected global::System.Web.UI.WebControls.Label lblDisplayName;
 
         /// <summary>
-        /// lblLogout control.
+        /// btnUserUpdateDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lblLogout;
+        protected global::System.Web.UI.WebControls.LinkButton btnUserUpdateDetail;
+
+        /// <summary>
+        /// btnLogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnLogout;
 
         /// <summary>
         /// cphContent control.

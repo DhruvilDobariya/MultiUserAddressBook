@@ -22,12 +22,6 @@
         </div>
         <asp:GridView ID="gvCity" runat="server" CssClass="" AutoGenerateColumns="false" OnRowCommand="gvCity_RowCommand">
             <Columns>
-                <asp:BoundField DataField="CityID" HeaderText="Id" />
-                <asp:BoundField DataField="CityName" HeaderText="Name" />
-                <asp:BoundField DataField="PinCode" HeaderText="Pin Code" />
-                <asp:BoundField DataField="STDCode" HeaderText="STD Code" />
-                <asp:BoundField DataField="StateName" HeaderText="State"/>
-                <asp:BoundField DataField="CreationDate" HeaderText="Creation Date" />
                 <asp:TemplateField HeaderText="Edit">
                     <ItemTemplate>
                         <asp:HyperLink runat="server" ID="hlEdit" CssClass="btn btn-gradient" NavigateUrl='<%# "~/AdminPanel/City/CityAddEdit.aspx?CityID=" + Eval("CityID").ToString().Trim() %>'>
@@ -42,6 +36,12 @@
                         </asp:LinkButton>
                     </ItemTemplate>
                 </asp:TemplateField>
+                <asp:BoundField DataField="CityID" HeaderText="Id" />
+                <asp:BoundField DataField="CityName" HeaderText="Name" />
+                <asp:BoundField DataField="PinCode" HeaderText="Pin Code" />
+                <asp:BoundField DataField="STDCode" HeaderText="STD Code" />
+                <asp:BoundField DataField="StateName" HeaderText="State"/>
+                <asp:BoundField DataField="CreationDate" HeaderText="Creation Date" />
             </Columns>
         </asp:GridView>
     </div>
