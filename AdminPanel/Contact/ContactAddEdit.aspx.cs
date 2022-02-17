@@ -410,7 +410,11 @@ namespace MultiUserAddressBook.AdminPanel.Contact
                 {
                     #region Add record
                     objCmd.CommandText = "PR_Contact_InsertUserID";
-                    int ID = Int32.Parse(objCmd.ExecuteScalar().ToString());
+                    objCmd.Parameters.Add("@ContactID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
+                    objCmd.ExecuteNonQuery();
+
+                    SqlInt32 ContactID = 0;
+                    ContactID = Convert.ToInt32(objCmd.Parameters["@ContactID"].Value);
                     lblMsg.Text = "Contact Added Successfully";
                     ClearControls();
                     #endregion Add record
