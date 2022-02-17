@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="ContactList.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.Contact.ContactList" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.master" AutoEventWireup="true" CodeFile="ContactList.aspx.cs" Inherits="AdminPanel_Contact_ContactList" %>
 
 <asp:Content ID="cHead" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
@@ -39,6 +39,18 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="ContactId" HeaderText="Id" />
+                    <asp:TemplateField HeaderText="Image">
+                        <ItemTemplate>
+                            <asp:Image runat="server" ID="imgImage" CssClass="img-fluid me-4" AlternateText="Image dosen't upload or found!" Height="50" ImageUrl='<%# Eval("FilePath") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Delete Image">
+                        <ItemTemplate>
+                            <asp:LinkButton runat="server" ID="btnDeleteImg" CssClass="btn btn-danger" CommandName="DeleteImage" CommandArgument='<%# Eval("ContactID").ToString() %>'>
+                             <i class="fas fa-trash-alt"></i>
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="ContactName" HeaderText="Name" />
                     <asp:BoundField DataField="ContactCategoryName" HeaderText="Contact Category" />
                     <asp:BoundField DataField="CityName" HeaderText="City Name" />

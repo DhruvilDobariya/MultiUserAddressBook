@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="ContactCategoryAddEdit.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.ContactCategory.ContactCategoryAddEdit" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.master" enableEventValidation="false" AutoEventWireup="true" CodeFile="ContactCategoryAddEdit.aspx.cs" Inherits="AdminPanel_ContactCategory_ContactCategoryAddEdit" %>
+
 <asp:Content ID="cHead" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
 <asp:Content ID="cContant" ContentPlaceHolderID="cphContent" runat="Server">
@@ -25,3 +26,4 @@
 
     </div>
 </asp:Content>
+

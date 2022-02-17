@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="AddressBook.master.cs" Inherits="MultiUserAddressBook.Content.AddressBook" %>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="AddressBook.master.cs" Inherits="Content_AddressBook" %>
 
 <!DOCTYPE html>
 

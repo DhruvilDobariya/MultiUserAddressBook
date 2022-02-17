@@ -1,4 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.Master" AutoEventWireup="true" CodeBehind="CityAddEdit.aspx.cs" Inherits="MultiUserAddressBook.AdminPanel.City.CityAddEdit" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Content/AddressBook.master" EnableEventValidation="false" AutoEventWireup="true" CodeFile="CityAddEdit.aspx.cs" Inherits="AdminPanel_City_CityAddEdit" %>
+
 <asp:Content ID="cHead" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
 <asp:Content ID="cContant" ContentPlaceHolderID="cphContent" runat="Server">
@@ -38,3 +39,4 @@
 
     </div>
 </asp:Content>
+

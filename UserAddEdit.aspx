@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="UserAddEdit.aspx.cs" Inherits="MultiUserAddressBook.Registrastion" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="UserAddEdit.aspx.cs" Inherits="UserAddEdit" %>
 
 <!DOCTYPE html>
 
