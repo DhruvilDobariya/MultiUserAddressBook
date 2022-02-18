@@ -528,7 +528,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                 lblMsg.Text = "Contact Not Found!";
             }
             #endregion Get data and set data
-
+            
             if (objConn.State == ConnectionState.Open)
                 objConn.Close();
         }

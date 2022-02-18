@@ -22,7 +22,7 @@
                         <asp:DropDownList ID="ddContactCategory" runat="server" CssClass="form-select"></asp:DropDownList>
                         <asp:RequiredFieldValidator ID="rfvCotactCategory" runat="server" ErrorMessage="Please Select Contact Category" ControlToValidate="ddContactCategory" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <asp:Label runat="server" ID="lblCountry" CssClass="form-lable m-1">Select Country Name</asp:Label>
                         <asp:DropDownList ID="ddCountry" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddCountry_SelectedIndexChanged"></asp:DropDownList>
@@ -94,7 +94,7 @@
                     </div>
                     <div class="col-md-6">
                         <asp:Label runat="server" ID="lblFile" CssClass="form-lable m-1">Enter Document</asp:Label>
-                        <asp:FileUpload runat="server" ID="fuFile" CssClass="form-control m-1 ms-3 me-4"/>
+                        <asp:FileUpload runat="server" ID="fuFile" CssClass="form-control m-1 ms-3 me-4" />
                     </div>
                 </div>
 
