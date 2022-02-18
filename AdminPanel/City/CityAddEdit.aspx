@@ -30,8 +30,8 @@
                     <asp:TextBox ID="txtSTD" runat="server" CssClass="form-control m-1"></asp:TextBox>
                 </div>
                 <div>
-                    <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-success mx-1 my-2" Text="Add" OnClick="btnSubmit_Click" />
-                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-dark mx-1 my-2" NavigateUrl="~/AdminPanel/City/CityList.aspx">Back</asp:HyperLink>
+                    <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-gradient mx-1 my-2" Text="Add" OnClick="btnSubmit_Click" />
+                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-danger mx-1 my-2" NavigateUrl="~/AdminPanel/City/CityList.aspx">Back</asp:HyperLink>
                     <asp:Label ID="lblMsg" runat="server"></asp:Label>
                 </div>
             </form>

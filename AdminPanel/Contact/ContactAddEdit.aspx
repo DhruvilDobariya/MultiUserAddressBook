@@ -19,8 +19,7 @@
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <asp:Label runat="server" ID="lblContactCategory" CssClass="form-lable m-1">Select Contact Category</asp:Label>
-                        <asp:DropDownList ID="ddContactCategory" runat="server" CssClass="form-select"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="rfvCotactCategory" runat="server" ErrorMessage="Please Select Contact Category" ControlToValidate="ddContactCategory" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
+                        <asp:CheckBoxList ID="cblContactCategory" runat="server" CssClass="form-check mt-2"></asp:CheckBoxList>
                     </div>
 
                     <div class="col-md-6">
@@ -47,16 +46,18 @@
                         <asp:Label runat="server" ID="lblContactNo" CssClass="form-lable m-1">Enter Contact No</asp:Label>
                         <asp:TextBox ID="txtContactNo" runat="server" CssClass="form-control m-1"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvContactNo" runat="server" ErrorMessage="Please Select Contact No" ControlToValidate="txtContactNo" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RegularExpressionValidator ID="revContactNo" runat="server" ErrorMessage="Please Enter Valid Contact No" ControlToValidate="txtContactNo" ForeColor="Red" Display="Dynamic" ValidationExpression="^([1-9]{1})([234789]{1})([0-9]{8})$"></asp:RegularExpressionValidator>
                     </div>
                     <div class="col-md-6">
                         <label class="form-lable m-1">Enter Whatsapp No</label>
                         <asp:TextBox ID="txtWhatsappNo" runat="server" CssClass="form-control m-1"></asp:TextBox>
+                        <asp:RegularExpressionValidator ID="revWhatsappNo" runat="server" ErrorMessage="Please Enter Valid Whatsapp No" ControlToValidate="txtWhatsappNo" ForeColor="Red" Display="Dynamic" ValidationExpression="^([1-9]{1})([234789]{1})([0-9]{8})$"></asp:RegularExpressionValidator>
                     </div>
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <label class="form-lable m-1">Enter Birth Date</label>
-                        <asp:TextBox ID="txtBirthDate" runat="server" CssClass="form-control m-1" TextMode="Date"></asp:TextBox>
+                        <asp:TextBox ID="txtBirthDate" runat="server" CssClass="form-control m-1" TextMode="DateTime"></asp:TextBox>
                         <asp:CompareValidator ID="cvBirthDate" runat="server" ControlToValidate="txtBirthDate" Display="Dynamic" ErrorMessage="Enter valid Date of Birth" ForeColor="Red" Operator="DataTypeCheck" Type="Date"></asp:CompareValidator>
                     </div>
                     <div class="col-md-6">
@@ -89,7 +90,7 @@
                 <div class="row mt-2">
                     <div class="col-md-6 pe-4">
                         <asp:Label runat="server" ID="lblAddress" CssClass="form-lable m-1">Enter Your Address</asp:Label>
-                        <asp:TextBox ID="txtAddress" CssClass="form-control m-1 ms-3 me-4" runat="server" Rows="4" TextMode="MultiLine"></asp:TextBox>
+                        <asp:TextBox ID="txtAddress" CssClass="form-control m-1 ms-2 me-4" runat="server" Rows="4" TextMode="MultiLine"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvAddress" runat="server" ErrorMessage="Please Enter Address" ControlToValidate="txtAddress" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>
                     <div class="col-md-6">
@@ -99,8 +100,8 @@
                 </div>
 
                 <div>
-                    <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-success mx-1 my-2" Text="Add" OnClick="btnSubmit_Click" />
-                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-dark mx-1 my-2" NavigateUrl="~/AdminPanel/Contact/ContactList.aspx">Back</asp:HyperLink>
+                    <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-gradient mx-1 my-2" Text="Add" OnClick="btnSubmit_Click" />
+                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-danger mx-1 my-2" NavigateUrl="~/AdminPanel/Contact/ContactList.aspx">Back</asp:HyperLink>
                     <asp:Label ID="lblMsg" runat="server"></asp:Label>
                 </div>
             </form>

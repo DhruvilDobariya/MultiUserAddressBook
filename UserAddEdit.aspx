@@ -29,7 +29,7 @@
                     <div>
                         <label class="form-lable m-1">Enter Your Name</label>
                         <asp:TextBox ID="txtName" runat="server" CssClass="form-control m-1"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Please Enter Name" ControlToValidate="txtName" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="rfvName" runat="server" ErrorMessage="Please Enter Name" ControlToValidate="txtName" Display="Dynamic" ForeColor="Red" ValidationGroup="Login"></asp:RequiredFieldValidator>
                     </div>
                     <div>
                         <label class="form-lable m-1">Enter Mobile No</label>
@@ -45,22 +45,22 @@
                     <div>
                         <label class="form-lable m-1">UserName</label>
                         <asp:TextBox ID="txtUserName" runat="server" CssClass="form-control m-1"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="Please Enter User Name" ControlToValidate="txtUserName" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="rfvUserName" runat="server" ErrorMessage="Please Enter User Name" ControlToValidate="txtUserName" Display="Dynamic" ForeColor="Red" ValidationGroup="Login"></asp:RequiredFieldValidator>
                     </div>
                     <div>
                         <label class="form-lable m-1">Password</label>
                         <asp:TextBox ID="txtPassword" runat="server" CssClass="form-control m-1"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Please Enter Password" ControlToValidate="txtPassword" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
+                        <asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Please Enter Password" ControlToValidate="txtPassword" Display="Dynamic" ForeColor="Red" ValidationGroup="Login"></asp:RequiredFieldValidator>
                     </div>
                     <div>
                         <label class="form-lable m-1">Retype Password</label>
                         <asp:TextBox ID="txtRetypePassword" runat="server" CssClass="form-control m-1"></asp:TextBox>
-                        <asp:RequiredFieldValidator ID="rfvRetypePassword" runat="server" ErrorMessage="Please Enter Retype Password" ControlToValidate="txtRetypePassword" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
-                        <asp:CompareValidator ID="cvRetypePassword" runat="server" ErrorMessage="Password and Retype Password Not Same" ControlToCompare="txtPassword" ControlToValidate="txtRetypePassword" Display="Dynamic" ForeColor="Red"></asp:CompareValidator>
+                        <asp:RequiredFieldValidator ID="rfvRetypePassword" runat="server" ErrorMessage="Please Enter Retype Password" ControlToValidate="txtRetypePassword" Display="Dynamic" ForeColor="Red" ValidationGroup="Login"></asp:RequiredFieldValidator>
+                        <asp:CompareValidator ID="cvRetypePassword" runat="server" ErrorMessage="Password and Retype Password Not Same" ControlToCompare="txtPassword" ControlToValidate="txtRetypePassword" Display="Dynamic" ForeColor="Red" ValidationGroup="Login"></asp:CompareValidator>
                     </div>
                     <div>
-                        <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-success mx-1 my-2" Text="Submit" OnClick="btnSubmit_Click"/>
-                        <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-dark mx-1 my-2" NavigateUrl="~/Login.aspx">Back</asp:HyperLink>
+                        <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-success mx-1 my-2" Text="Submit" OnClick="btnSubmit_Click" ValidationGroup="Login"/>
+                        <asp:LinkButton runat="server" ID="btnBack" CssClass="btn btn-dark mx-1 my-2" OnClick="btnBack_Click">Back</asp:LinkButton>
                         <asp:Label ID="lblMsg" runat="server"></asp:Label>
                     </div>
                 </form>

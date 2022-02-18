@@ -22,11 +22,6 @@ public partial class UserAddEdit : System.Web.UI.Page
                 btnSubmit.Text = "Edit";
                 lblTitle.Text = "Edit User Details";
             }
-            else
-            {
-                Session.Clear();
-                Response.Redirect("~/Login.aspx");
-            }
         }
     }
     #endregion Page Load
@@ -230,4 +225,16 @@ public partial class UserAddEdit : System.Web.UI.Page
         }
     }
     #endregion FillControlls
+
+    protected void btnBack_Click(object sender, EventArgs e)
+    {
+        if(Request.QueryString["UserID"] != null)
+        {
+            Response.Redirect("~/AdminPanel/Home.aspx", true);
+        }
+        else
+        {
+            Response.Redirect("~/Login.aspx", true);
+        }
+    }
 }

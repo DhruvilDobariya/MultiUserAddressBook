@@ -3,7 +3,7 @@
 <asp:Content ID="cHead" ContentPlaceHolderID="cphHead" runat="Server">
 </asp:Content>
 <asp:Content ID="cContent" ContentPlaceHolderID="cphContent" runat="Server">
-    <div class="my-4 p-4">
+    <div class="container border my-4 p-4">
         <div class="row mb-2">
             <div class="col-md-4">
                 <h2>
@@ -22,7 +22,7 @@
             </div>
         </div>
         <div class="scrollmanu">
-            <asp:GridView ID="gvContact" runat="server" CssClass="" RowStyle-Wrap="false" AutoGenerateColumns="false" OnRowCommand="gvContact_RowCommand">
+            <asp:GridView ID="gvContact" runat="server" CssClass="myTable" AutoGenerateColumns="false" OnRowCommand="gvContact_RowCommand">
                 <Columns>
                     <asp:TemplateField HeaderText="Edit">
                         <ItemTemplate>
@@ -39,20 +39,7 @@
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="ContactId" HeaderText="Id" />
-                    <asp:TemplateField HeaderText="Image">
-                        <ItemTemplate>
-                            <asp:Image runat="server" ID="imgImage" CssClass="img-fluid me-4" AlternateText="Image dosen't upload or found!" Height="50" ImageUrl='<%# Eval("FilePath") %>' />
-                        </ItemTemplate>
-                    </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Delete Image">
-                        <ItemTemplate>
-                            <asp:LinkButton runat="server" ID="btnDeleteImg" CssClass="btn btn-danger" CommandName="DeleteImage" CommandArgument='<%# Eval("ContactID").ToString() %>'>
-                             <i class="fas fa-trash-alt"></i>
-                            </asp:LinkButton>
-                        </ItemTemplate>
-                    </asp:TemplateField>
                     <asp:BoundField DataField="ContactName" HeaderText="Name" />
-                    <asp:BoundField DataField="ContactCategoryName" HeaderText="Contact Category" />
                     <asp:BoundField DataField="CityName" HeaderText="City Name" />
                     <asp:BoundField DataField="StateName" HeaderText="State Name" />
                     <asp:BoundField DataField="CountryName" HeaderText="Country Name" />
@@ -65,6 +52,18 @@
                     <asp:BoundField DataField="FacebookID" HeaderText="Facebook Id" />
                     <asp:BoundField DataField="LinkedinID" HeaderText="Linkedin Id" />
                     <asp:BoundField DataField="Address" HeaderText="Address" />
+                    <asp:TemplateField HeaderText="Image">
+                        <ItemTemplate>
+                            <asp:Image runat="server" ID="imgImage" CssClass="img-fluid me-4" AlternateText="Image dosen't upload or found!" Height="50" ImageUrl='<%# Eval("FilePath") %>' />
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Delete Image">
+                        <ItemTemplate>
+                            <asp:LinkButton runat="server" ID="btnDeleteImg" CssClass="btn btn-danger" CommandName="DeleteImage" CommandArgument='<%# Eval("ContactID").ToString() %>'>
+                             <i class="fas fa-trash-alt"></i>
+                            </asp:LinkButton>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="CreationDate" HeaderText="Creation Date" />
                 </Columns>
             </asp:GridView>

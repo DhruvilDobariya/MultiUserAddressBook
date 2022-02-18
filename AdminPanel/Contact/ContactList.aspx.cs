@@ -92,6 +92,8 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
             if (objConn.State != ConnectionState.Open)
                 objConn.Open();
 
+            DeleteContactCategory(Id);
+
             #region Delete Image
             FileInfo file = new FileInfo(Server.MapPath("~/UserContent/" + Id.ToString() + ".jpg"));
 
@@ -108,7 +110,7 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
             if (Session["UserID"] != null)
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             objCmd.ExecuteNonQuery();
-            lblMsg.Text = "Contact Deleted Successfully!";
+            
             #endregion Create Command and Set Parameters
 
             if (objConn.State == ConnectionState.Open)
@@ -175,4 +177,41 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
         }
     }
     #endregion Delete Image
+
+    #region Delete Contact Category
+    private void DeleteContactCategory(SqlInt32 Id)
+    {
+
+        #region Set Connection
+        SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
+        #endregion Set Connection
+        try
+        {
+
+
+            if (objConn.State != ConnectionState.Open)
+                objConn.Open();
+
+            SqlCommand objCmd = new SqlCommand("PR_ContactWiseContactCategory_DeleteByContactIDUserID", objConn);
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.Parameters.AddWithValue("@ContactId", Id);
+            if (Session["UserID"] != null)
+                objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
+            objCmd.ExecuteNonQuery();
+            lblMsg.Text = "Contact Deleted Successfully!";
+            if (objConn.State == ConnectionState.Open)
+                objConn.Close();
+
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = ex.Message + ex;
+        }
+        finally
+        {
+            if (objConn.State == ConnectionState.Open)
+                objConn.Close();
+        }
+    }
+    #endregion Delete Contact Category
 }
