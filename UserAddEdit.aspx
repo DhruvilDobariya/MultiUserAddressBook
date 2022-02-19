@@ -34,12 +34,16 @@
                     <div>
                         <label class="form-lable m-1">Enter Mobile No</label>
                         <asp:TextBox ID="txtMobileNo" runat="server" CssClass="form-control m-1"></asp:TextBox>
+                        <asp:RegularExpressionValidator ID="revMobileNo" runat="server" ErrorMessage="Please Enter Valid Mobile No" ControlToValidate="txtMobileNo" ForeColor="Red" Display="Dynamic" ValidationExpression="^([1-9]{1})([234789]{1})([0-9]{8})$"></asp:RegularExpressionValidator>
                     </div>
                     <div>
                         <label class="form-lable m-1">Enter Address</label>
                         <asp:TextBox ID="txtAddress" runat="server" CssClass="form-control m-1" TextMode="MultiLine"></asp:TextBox>
+                    </div>
+                    <div>
                         <label class="form-lable m-1">Enter Email</label>
                         <asp:TextBox ID="txtEmail" runat="server" CssClass="form-control m-1"></asp:TextBox>
+                        <asp:RegularExpressionValidator ID="revEmail" runat="server" ErrorMessage="Please Enter Valid Email" ControlToValidate="txtEmail" ForeColor="Red" Display="Dynamic" ValidationExpression="\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*"></asp:RegularExpressionValidator>
                     </div>
                     <h4 class="mt-3">Login Information</h4>
                     <div>
@@ -59,8 +63,8 @@
                         <asp:CompareValidator ID="cvRetypePassword" runat="server" ErrorMessage="Password and Retype Password Not Same" ControlToCompare="txtPassword" ControlToValidate="txtRetypePassword" Display="Dynamic" ForeColor="Red" ValidationGroup="Login"></asp:CompareValidator>
                     </div>
                     <div>
-                        <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-success mx-1 my-2" Text="Submit" OnClick="btnSubmit_Click" ValidationGroup="Login"/>
-                        <asp:LinkButton runat="server" ID="btnBack" CssClass="btn btn-dark mx-1 my-2" OnClick="btnBack_Click">Back</asp:LinkButton>
+                        <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-gradient mx-1 my-2" Text="Submit" OnClick="btnSubmit_Click" ValidationGroup="Login"/>
+                        <asp:LinkButton runat="server" ID="btnBack" CssClass="btn btn-danger mx-1 my-2" OnClick="btnBack_Click">Back</asp:LinkButton>
                         <asp:Label ID="lblMsg" runat="server"></asp:Label>
                     </div>
                 </form>

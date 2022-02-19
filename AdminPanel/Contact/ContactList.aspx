@@ -40,6 +40,13 @@
                     </asp:TemplateField>
                     <asp:BoundField DataField="ContactId" HeaderText="Id" />
                     <asp:BoundField DataField="ContactName" HeaderText="Name" />
+                    <asp:TemplateField HeaderText="Contact Categories" ItemStyle-CssClass="text-center">
+                        <ItemTemplate>
+                            <asp:HyperLink runat="server" ID="hlContactWiseContactCategory" NavigateUrl='<%# "~/AdminPanel/Contact/ContactWiseContactCategoryList.aspx?ContactID=" + Eval("ContactID").ToString().Trim() %>' CssClass="btn btn-gradient">
+                            <i class="fas fa-eye"></i>
+                            </asp:HyperLink>
+                        </ItemTemplate>
+                    </asp:TemplateField>
                     <asp:BoundField DataField="CityName" HeaderText="City Name" />
                     <asp:BoundField DataField="StateName" HeaderText="State Name" />
                     <asp:BoundField DataField="CountryName" HeaderText="Country Name" />
@@ -57,7 +64,7 @@
                             <asp:Image runat="server" ID="imgImage" CssClass="img-fluid me-4" AlternateText="Image dosen't upload or found!" Height="50" ImageUrl='<%# Eval("FilePath") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Delete Image">
+                    <asp:TemplateField HeaderText="Delete Image" ItemStyle-CssClass="text-center">
                         <ItemTemplate>
                             <asp:LinkButton runat="server" ID="btnDeleteImg" CssClass="btn btn-danger" CommandName="DeleteImage" CommandArgument='<%# Eval("ContactID").ToString() %>'>
                              <i class="fas fa-trash-alt"></i>

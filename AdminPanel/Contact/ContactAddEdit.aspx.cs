@@ -392,6 +392,8 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                 objCmd.Parameters.AddWithValue("@ContactID", Convert.ToInt32(Request.QueryString["ContactID"]));
                 objCmd.ExecuteNonQuery();
                 UploadImage(Convert.ToInt32(Request.QueryString["ContactID"]));
+                DeleteContactCategory(Convert.ToInt32(Request.QueryString["ContactID"]));
+                AddContactCategory(Convert.ToInt32(Request.QueryString["ContactID"]));
                 Response.Redirect("~/AdminPanel/Contact/ContactList.aspx");
                 #endregion Update record
             }
@@ -513,7 +515,10 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                 lblMsg.Text = "Contact Not Found!";
             }
             #endregion Get data and set data
-            
+
+            FillContactCategoryCheckBoxs(Id);
+
+
             if (objConn.State == ConnectionState.Open)
                 objConn.Close();
         }
@@ -574,6 +579,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
         ddCity.SelectedValue = "-1";
         ddState.SelectedValue = "-1";
         ddCountry.SelectedValue = "-1";
+        cblContactCategory.ClearSelection();
     }
     #endregion Clear Controls
 
@@ -682,13 +688,13 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             if (objConn.State != ConnectionState.Open)
                 objConn.Open();
 
-            SqlCommand objCmd = new SqlCommand("PR_ContactWiseContactCategory_InsertUserID", objConn);
+            SqlCommand objCmd = new SqlCommand("PR_ContactWiseContactCategory_DeleteByContactIDUserID", objConn);
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.Parameters.AddWithValue("@ContactId", Id);
             if (Session["UserID"] != null)
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             objCmd.ExecuteNonQuery();
-
+            lblMsg.Text = "Contact Deleted Successfully!";
             if (objConn.State == ConnectionState.Open)
                 objConn.Close();
 
@@ -706,9 +712,51 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
     #endregion Delete Contact Category
 
     #region Fill Contact Category CheckBoxs
-    private void FillContactCategoryCheckBoxs()
+    private void FillContactCategoryCheckBoxs(SqlInt32 Id)
     {
+        #region Set Connection
+        SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
+        #endregion Set Connection
+        try
+        {
 
+
+            if (objConn.State != ConnectionState.Open)
+                objConn.Open();
+
+            SqlCommand objCmd = new SqlCommand("PR_ContactCategory_SelectOrNot", objConn);
+            objCmd.CommandType = CommandType.StoredProcedure;
+            if (Session["UserID"] != null)
+                objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
+            objCmd.Parameters.AddWithValue("@ContactID", Id);
+            SqlDataReader objSDR = objCmd.ExecuteReader();
+
+            if (objSDR.HasRows)
+            {
+                while (objSDR.Read())
+                {
+                    if(objSDR["SelectOrNot"].ToString() == "Selected")
+                    {
+                        cblContactCategory.Items.FindByValue(objSDR["ContactCategoryID"].ToString()).Selected = true;
+                    }
+                    
+                }
+            }
+           
+
+            if (objConn.State == ConnectionState.Open)
+                objConn.Close();
+
+        }
+        catch (Exception ex)
+        {
+            lblMsg.Text = ex.Message + ex;
+        }
+        finally
+        {
+            if (objConn.State == ConnectionState.Open)
+                objConn.Close();
+        }
     }
     #endregion Fill Contact Category CheckBoxs
 }
