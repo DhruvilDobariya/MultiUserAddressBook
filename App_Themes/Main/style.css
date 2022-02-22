@@ -21,9 +21,9 @@ body {
     background-image: linear-gradient(to right,#13294b,#13294b);
 }
 
-    .header2:hover {
-        color: white;
-    }
+.header2:hover {
+    color: white;
+}
 
 .btn-gradient {
     background-color: #13294b;

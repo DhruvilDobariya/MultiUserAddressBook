@@ -147,7 +147,6 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
             if (Session["UserID"] != null)
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             objCmd.ExecuteNonQuery();
-
             FileInfo file = new FileInfo(Server.MapPath("~/UserContent/" + Id.ToString() + ".jpg"));
 
             if (file.Exists)

@@ -51,10 +51,10 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             SqlDataReader objSDR = objCmd.ExecuteReader();
             if (objSDR.HasRows)
             {
-                cblContactCategory.DataSource = objSDR;
-                cblContactCategory.DataValueField = "ContactCategoryID";
-                cblContactCategory.DataTextField = "ContactCategoryName";
-                cblContactCategory.DataBind();
+                chkContactCategory.DataSource = objSDR;
+                chkContactCategory.DataValueField = "ContactCategoryID";
+                chkContactCategory.DataTextField = "ContactCategoryName";
+                chkContactCategory.DataBind();
             }
             #endregion Create Command and Bind Data
 
@@ -226,51 +226,13 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
         SqlString strLinkedin = SqlString.Null;
         SqlString strFacebook = SqlString.Null;
         SqlString strAddress = SqlString.Null;
-        SqlString strFilePath = SqlString.Null;
 
         bool flag = false;
         int i = 1;
         string temp = "";
         #endregion Local Variable
         #region Server side validaton
-        /* Using Dictionary
-        IDictionary<TextBox, Label> textBoxValidation = new Dictionary<TextBox, Label>()
-        {
-            {txtContact, lblContact },
-            {txtContactNo, lblContactNo },
-            {txtEmail, lblEmail},
-            {txtAddress, lblAddress }
-        };
-        IDictionary<DropDownList, Label> dropDownListValidation = new Dictionary<DropDownList, Label>() 
-        {
-            {ddContactCategory, lblContactCategory },
-            {ddCity, lblCity },
-            {ddState, lblState },
-            {ddCountry, lblCountry }
-        };
-        foreach(KeyValuePair<TextBox, Label> pair in textBoxValidation)
-        {   
-            if(pair.Key.Text == "")
-            {
-                flag = true;
-                temp += i + ") " + pair.Value.Text + "</br>"; 
-            }
-            i++;
-        }
-        foreach (KeyValuePair<DropDownList, Label> pair in dropDownListValidation)
-        {
-            if (pair.Key.SelectedValue == "-1")
-            {
-                flag = true;
-                temp += i + ") " + pair.Value.Text + "</br>";
-            }
-            i++;
-        }
-        if (flag)
-        {
-            lblMsg.Text = "</br> Please : </br>" + temp;
-            return;
-        }*/
+        
         if (txtContact.Text.Trim() == "")
         {
             temp += "<li>" + lblContact.Text.Trim() + "</li>";
@@ -304,6 +266,11 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
         if (txtAddress.Text.Trim() == "")
         {
             temp += "<li>" + lblAddress.Text.Trim() + "</li>";
+            flag = true;
+        }
+        if (chkContactCategory.SelectedValue == "")
+        {
+            temp += "<li>Select at least Contact Category</li>";
             flag = true;
         }
 
@@ -391,7 +358,19 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                 objCmd.CommandText = "PR_Contact_UpdateByPKUserID";
                 objCmd.Parameters.AddWithValue("@ContactID", Convert.ToInt32(Request.QueryString["ContactID"]));
                 objCmd.ExecuteNonQuery();
-                UploadImage(Convert.ToInt32(Request.QueryString["ContactID"]));
+                string FileType = Path.GetExtension(fuFile.FileName).ToLower();
+                if (fuFile.HasFile)
+                {
+                    if (FileType == ".jpge" || FileType == ".jpg" || FileType == ".png" || FileType == ".gif")
+                    {
+                        UploadImage(Convert.ToInt32(Request.QueryString["ContactID"]), "Image");
+                    }
+                    else
+                    {
+                        lblMsg.Text = "Please Upload Valid File(File must have .jpg or .jpge or .png or .gif extention).";
+                        return;
+                    }
+                }
                 DeleteContactCategory(Convert.ToInt32(Request.QueryString["ContactID"]));
                 AddContactCategory(Convert.ToInt32(Request.QueryString["ContactID"]));
                 Response.Redirect("~/AdminPanel/Contact/ContactList.aspx");
@@ -401,14 +380,26 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             {
                 #region Add record
                 objCmd.CommandText = "PR_Contact_InsertUserID";
-                objCmd.Parameters.AddWithValue("@FilePath", strFilePath);
                 objCmd.Parameters.Add("@ContactID", SqlDbType.Int, 4).Direction = ParameterDirection.Output;
                 objCmd.ExecuteNonQuery();
                 ContactID = Convert.ToInt32(objCmd.Parameters["@ContactID"].Value);
-                UploadImage(ContactID);
+                string FileType = Path.GetExtension(fuFile.FileName).ToLower();
+                if (fuFile.HasFile)
+                {
+                    if (FileType == ".jpge" || FileType == ".jpg" || FileType == ".png" || FileType == ".gif")
+                    {
+                        UploadImage(ContactID, "Image");
+                    }
+                    else
+                    {
+                        lblMsg.Text = "Please Upload Valid File(File must have .jpg or .jpge or .png or .gif extention).";
+                        return;
+                    }
+                }
                 AddContactCategory(ContactID);
                 //lblMsg.Text = "Contact Added Successfully";
                 ClearControls();
+                
                 #endregion Add record
             }
 
@@ -480,8 +471,8 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                     if (!objSDR["BirthDate"].Equals(DBNull.Value))
                     {
                         DateTime bd = Convert.ToDateTime(objSDR["BirthDate"]);
-                        txtBirthDate.Text = bd.ToShortDateString();
-                        //txtBirthDate.Text = bd.ToString("mm-dd-yyyy");
+                        //txtBirthDate.Text = bd.ToShortDateString();
+                        txtBirthDate.Text = bd.ToString("yyyy-MM-dd");
                     }
                     if (!objSDR["Email"].Equals(DBNull.Value))
                     {
@@ -579,12 +570,12 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
         ddCity.SelectedValue = "-1";
         ddState.SelectedValue = "-1";
         ddCountry.SelectedValue = "-1";
-        cblContactCategory.ClearSelection();
+        chkContactCategory.ClearSelection();
     }
     #endregion Clear Controls
 
     #region Upload Image
-    private void UploadImage(SqlInt32 Id)
+    private void UploadImage(SqlInt32 Id, string FileExtention)
     {
         SqlString strFilePath = SqlString.Null;
 
@@ -598,21 +589,28 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             if (objConn.State != ConnectionState.Open)
                 objConn.Open();
 
+            #region Image Upload
             strFilePath = "~/UserContent/" + Id + ".jpg";
-            SqlCommand objCmd = new SqlCommand("PR_Contact_UpdateImagePathByPKUserID", objConn);
-            objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.Parameters.AddWithValue("@ContactID", Id);
-            objCmd.Parameters.AddWithValue("@FilePath", strFilePath);
-            if (Session["UserID"] != null)
-                objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
-
-            objCmd.ExecuteNonQuery();
-
             if (!Directory.Exists(Server.MapPath("~/UserContent/")))
             {
                 Directory.CreateDirectory(Server.MapPath("~/UserContent/"));
             }
             fuFile.SaveAs(Server.MapPath("~/UserContent/" + Id + ".jpg"));
+            long length = new FileInfo(Server.MapPath(strFilePath.ToString())).Length;
+            #endregion Image Upload
+
+            #region Create Command and Set Parameters
+            SqlCommand objCmd = new SqlCommand("PR_Contact_UpdateImagePathByPKUserID", objConn);
+            objCmd.CommandType = CommandType.StoredProcedure;
+            objCmd.Parameters.AddWithValue("@ContactID", Id);
+            objCmd.Parameters.AddWithValue("@FilePath", strFilePath);
+            objCmd.Parameters.AddWithValue("@FileType", Convert.ToString(FileExtention));
+            objCmd.Parameters.AddWithValue("@FileSize", Convert.ToString(length));
+            if (Session["UserID"] != null)
+                objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
+
+            objCmd.ExecuteNonQuery();
+            #endregion Create Command and Set Parameters
 
             if (objConn.State == ConnectionState.Open)
                 objConn.Close();
@@ -644,10 +642,11 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             if (objConn.State != ConnectionState.Open)
                 objConn.Open();
 
-            foreach (ListItem item in cblContactCategory.Items)
+            foreach (ListItem item in chkContactCategory.Items)
             {
                 if (item.Selected)
                 {
+                    #region Create Command and Set Parameter
                     SqlCommand objCmd = new SqlCommand("PR_ContactWiseContactCategory_InsertUserID", objConn);
                     objCmd.CommandType = CommandType.StoredProcedure;
                     objCmd.Parameters.AddWithValue("@ContactCategoryID", Convert.ToInt32(item.Value));
@@ -655,9 +654,12 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                         objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                     objCmd.Parameters.AddWithValue("@ContactID", Id);
                     objCmd.ExecuteNonQuery();
+                    #endregion Create Command and Set Parameter
                 }
             }
+
             lblMsg.Text = "Contact Added Successfully";
+
             if (objConn.State == ConnectionState.Open)
                 objConn.Close();
 
@@ -688,13 +690,17 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             if (objConn.State != ConnectionState.Open)
                 objConn.Open();
 
+            #region Create Command and Set Parameter
             SqlCommand objCmd = new SqlCommand("PR_ContactWiseContactCategory_DeleteByContactIDUserID", objConn);
             objCmd.CommandType = CommandType.StoredProcedure;
             objCmd.Parameters.AddWithValue("@ContactId", Id);
             if (Session["UserID"] != null)
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             objCmd.ExecuteNonQuery();
+            #endregion Create Command and Set Parameter
+
             lblMsg.Text = "Contact Deleted Successfully!";
+
             if (objConn.State == ConnectionState.Open)
                 objConn.Close();
 
@@ -737,7 +743,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                 {
                     if(objSDR["SelectOrNot"].ToString() == "Selected")
                     {
-                        cblContactCategory.Items.FindByValue(objSDR["ContactCategoryID"].ToString()).Selected = true;
+                        chkContactCategory.Items.FindByValue(objSDR["ContactCategoryID"].ToString()).Selected = true;
                     }
                     
                 }

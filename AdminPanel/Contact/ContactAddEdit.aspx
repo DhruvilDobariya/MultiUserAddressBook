@@ -19,7 +19,7 @@
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <asp:Label runat="server" ID="lblContactCategory" CssClass="form-lable m-1">Select Contact Category</asp:Label>
-                        <asp:CheckBoxList ID="cblContactCategory" runat="server" CssClass="form-check mt-2"></asp:CheckBoxList>
+                        <asp:CheckBoxList ID="chkContactCategory" runat="server" CssClass="form-check mt-2"></asp:CheckBoxList>
                     </div>
 
                     <div class="col-md-6">
@@ -57,7 +57,7 @@
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <label class="form-lable m-1">Enter Birth Date</label>
-                        <asp:TextBox ID="txtBirthDate" runat="server" CssClass="form-control m-1" TextMode="DateTime"></asp:TextBox>
+                        <asp:TextBox ID="txtBirthDate" runat="server" CssClass="form-control m-1" TextMode="Date"></asp:TextBox>
                         <asp:CompareValidator ID="cvBirthDate" runat="server" ControlToValidate="txtBirthDate" Display="Dynamic" ErrorMessage="Enter valid Date of Birth" ForeColor="Red" Operator="DataTypeCheck" Type="Date"></asp:CompareValidator>
                     </div>
                     <div class="col-md-6">

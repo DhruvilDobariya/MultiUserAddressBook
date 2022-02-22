@@ -71,6 +71,8 @@
                             </asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
+                    <asp:BoundField DataField="FileType" HeaderText="File Type" />
+                    <asp:BoundField DataField="FileSize" HeaderText="File Size" />
                     <asp:BoundField DataField="CreationDate" HeaderText="Creation Date" />
                 </Columns>
             </asp:GridView>

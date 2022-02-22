@@ -13,7 +13,7 @@
 
     <link rel="icon" type="image/x-icon" href="~/Content/image/favicon.png">
     <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
-    <link href="~/Content/css/bootstrap.min.css" rel="stylesheet">
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js" rel="stylesheet">
     <asp:ContentPlaceHolder ID="cphHead" runat="server">
     </asp:ContentPlaceHolder>
 </head>
