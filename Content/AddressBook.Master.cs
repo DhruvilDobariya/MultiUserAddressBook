@@ -26,6 +26,9 @@ public partial class Content_AddressBook : System.Web.UI.MasterPage
 
         switch (str[2])
         {
+            case "Home":
+                hlHome.CssClass = "nav-link active";
+                break;
             case "Country":
                 hlCountry.CssClass = "nav-link active";
                 break;
