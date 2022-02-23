@@ -13,7 +13,7 @@ public partial class Content_AddressBook : System.Web.UI.MasterPage
         {
             if (Session["UserID"] == null)
             {
-                Response.Redirect("~/Login.aspx");
+                Response.Redirect("~/Signin");
             }
             lblDisplayName.Text = "Hi " + Session["DisplayName"].ToString();
         }
@@ -47,11 +47,11 @@ public partial class Content_AddressBook : System.Web.UI.MasterPage
     protected void btnLogout_Click(object sender, EventArgs e)
     {
         Session.Clear();
-        Response.Redirect("~/Login.aspx");
+        Response.Redirect("~/Signin");
     }
 
     protected void btnUserUpdateDetail_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/UserAddEdit.aspx?UserID=" + Session["UserID"]);
+        Response.Redirect("~/User/Edit/" + Session["UserID"]);
     }
 }

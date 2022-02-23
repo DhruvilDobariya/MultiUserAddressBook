@@ -15,7 +15,7 @@
                 <asp:Label ID="lblMsg" runat="server"></asp:Label>
             </div>
             <div class="col-md-4 d-flex justify-content-end p-2">
-                <asp:HyperLink runat="server" ID="btnAddCountry" NavigateUrl="~/AdminPanel/ContactCategory/ContactCategoryAddEdit.aspx" CssClass="btn btn-danger">
+                <asp:HyperLink runat="server" ID="btnAddCountry" NavigateUrl="~/AdminPanel/ContactCategory/Add" CssClass="btn btn-danger">
                     <i class="fas fa-plus"></i>
                     Add Contact Category
                 </asp:HyperLink>
@@ -25,7 +25,7 @@
             <Columns>
                 <asp:TemplateField HeaderText="Edit">
                     <ItemTemplate>
-                        <asp:HyperLink runat="server" ID="hlEdit" NavigateUrl='<%# "~/AdminPanel/ContactCategory/ContactCategoryAddEdit.aspx?ContactCategoryID=" + Eval("ContactCategoryID").ToString().Trim() %>' CssClass="btn btn-gradient">
+                        <asp:HyperLink runat="server" ID="hlEdit" NavigateUrl='<%# "~/AdminPanel/ContactCategory/Edit/" + Eval("ContactCategoryID").ToString().Trim() %>' CssClass="btn btn-gradient">
                             <i class="fas fa-edit"></i>
                         </asp:HyperLink>
                     </ItemTemplate>

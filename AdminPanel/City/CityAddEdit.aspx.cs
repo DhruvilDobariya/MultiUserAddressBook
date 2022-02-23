@@ -17,11 +17,11 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
         if (!Page.IsPostBack)
         {
             FillStateForDropDown();
-            if (Request.QueryString["CityID"] != null)
+            if (RouteData.Values["CityID"] != null)
             {
                 lblTitle.Text = "Edit City";
                 btnSubmit.Text = "Edit";
-                FillControlls(Convert.ToInt32(Request.QueryString["CityID"]));
+                FillControlls(Convert.ToInt32(RouteData.Values["CityID"]));
             }
         }
     }
@@ -29,40 +29,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
     #region Fill State
     private void FillStateForDropDown()
     {
-        #region Set Connection
-        SqlConnection objConn = new SqlConnection(ConfigurationManager.ConnectionStrings["AddressBookConnectionString"].ConnectionString);
-        #endregion Set Connection
-        try
-        {
-            if (objConn.State != ConnectionState.Open)
-                objConn.Open();
-
-            SqlCommand objCmd = new SqlCommand("PR_State_SelectForDropDownListUserID", objConn);
-            objCmd.CommandType = CommandType.StoredProcedure;
-            if (Session["UserID"] != null)
-                objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
-            SqlDataReader objSDR = objCmd.ExecuteReader();
-            if (objSDR.HasRows)
-            {
-                ddState.DataSource = objSDR;
-                ddState.DataValueField = "StateID";
-                ddState.DataTextField = "StateName";
-                ddState.DataBind();
-            }
-            if (objConn.State == ConnectionState.Open)
-                objConn.Close();
-            ddState.Items.Insert(0, new ListItem("Select State", "-1"));
-        }
-        catch (Exception ex)
-        {
-            lblMsg.Text = ex.Message;
-        }
-        finally
-        {
-            if (objConn.State == ConnectionState.Open)
-                objConn.Close();
-        }
-
+        CommonDropDownListMethods.FillStateDropDown(ddlState, Convert.ToInt32(Session["UserID"]),null);
     }
     #endregion Fill State
     #region Submit Form
@@ -75,7 +42,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
         SqlString StrSTDCode = SqlString.Null;
         #endregion Local variable
         #region Server side validation
-        if (txtCity.Text.Trim() == "" || ddState.SelectedIndex == -1)
+        if (txtCity.Text.Trim() == "" || ddlState.SelectedIndex == -1)
         {
             lblMsg.Text = "Please Enter City and Select State";
             return;
@@ -85,7 +52,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
             lblMsg.Text = "Please Select State";
             return;
         }
-        else if (ddState.SelectedValue == "-1")
+        else if (ddlState.SelectedValue == "-1")
         {
             lblMsg.Text = "Please Select State";
             return;
@@ -94,8 +61,8 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
         #region Set local variable
         if (txtCity.Text.Trim() != "")
             strCityName = txtCity.Text.Trim();
-        if (ddState.SelectedValue != "-1")
-            strStateID = Convert.ToInt32(ddState.SelectedValue);
+        if (ddlState.SelectedValue != "-1")
+            strStateID = Convert.ToInt32(ddlState.SelectedValue);
         if (txtPin.Text.Trim() != "")
             strPinCode = txtPin.Text.Trim();
         if (txtPin.Text.Trim() != "")
@@ -120,13 +87,13 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             #endregion Create Command and Set Parameters
 
-            if (Request.QueryString["CityID"] != null)
+            if (RouteData.Values["CityID"] != null)
             {
                 #region Update record
                 objCmd.CommandText = "PR_City_UpdateByPKUserID";
-                objCmd.Parameters.AddWithValue("@CityID", Convert.ToString(Request.QueryString["CityID"]));
+                objCmd.Parameters.AddWithValue("@CityID", Convert.ToString(RouteData.Values["CityID"]));
                 objCmd.ExecuteNonQuery();
-                Response.Redirect("~/AdminPanel/City/CityList.aspx");
+                Response.Redirect("~/AdminPanel/City/List");
                 #endregion Update record
             }
             else
@@ -136,7 +103,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
                 objCmd.ExecuteNonQuery();
                 lblMsg.Text = "City Added Successfully";
                 txtCity.Text = txtPin.Text = txtSTD.Text = "";
-                ddState.SelectedIndex = -1;
+                ddlState.SelectedIndex = -1;
                 #endregion Add record
             }
 
@@ -201,7 +168,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
                     }
                     if (!objSDR["StateID"].Equals(DBNull.Value))
                     {
-                        ddState.SelectedValue = objSDR["StateID"].ToString();
+                        ddlState.SelectedValue = objSDR["StateID"].ToString();
                     }
                     break;
                 }

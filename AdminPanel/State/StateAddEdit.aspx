@@ -23,12 +23,12 @@
                 </div>
                 <div>
                     <label class="form-lable m-1">Select Country Name</label>
-                    <asp:DropDownList ID="ddCountry" runat="server" CssClass="form-select"></asp:DropDownList>
-                    <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Please Select Country" ControlToValidate="ddCountry" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
+                    <asp:DropDownList ID="ddlCountry" runat="server" CssClass="form-select"></asp:DropDownList>
+                    <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Please Select Country" ControlToValidate="ddlCountry" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
                 </div>
                 <div>
                     <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-gradient mx-1 my-2" Text="Add" OnClick="btnSubmit_Click" />
-                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-danger mx-1 my-2" NavigateUrl="~/AdminPanel/State/StateList.aspx">Back</asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-danger mx-1 my-2" NavigateUrl="~/AdminPanel/State/List">Back</asp:HyperLink>
                     <asp:Label ID="lblMsg" runat="server"></asp:Label>
                 </div>
             </form>

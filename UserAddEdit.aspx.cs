@@ -16,7 +16,7 @@ public partial class UserAddEdit : System.Web.UI.Page
         lblMsg.Text = "";
         if (!Page.IsPostBack)
         {
-            if (Request.QueryString["UserID"] != null && Request.QueryString["UserID"].ToString() == Session["UserID"].ToString())
+            if (RouteData.Values["UserID"] != null && RouteData.Values["UserID"].ToString() == Session["UserID"].ToString())
             {
                 FillControlls();
                 btnSubmit.Text = "Edit";
@@ -108,14 +108,14 @@ public partial class UserAddEdit : System.Web.UI.Page
             objCmd.Parameters.AddWithValue("@Email", strEmail);
             objCmd.Parameters.AddWithValue("@MobileNo", strMobileNo);
             #endregion Create Command and Set Parameters
-            if (Request.QueryString["UserID"] != null)
+            if (RouteData.Values["UserID"] != null)
             {
                 #region Update record
                 objCmd.CommandText = "PR_User_UpdateByPK";
                 if (Session["UserID"] != null)
                     objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 objCmd.ExecuteNonQuery();
-                Response.Redirect("~/AdminPanel/Country/CountryList.aspx");
+                Response.Redirect("~/AdminPanel/Home");
                 #endregion Update record
             }
             else
@@ -228,13 +228,13 @@ public partial class UserAddEdit : System.Web.UI.Page
 
     protected void btnBack_Click(object sender, EventArgs e)
     {
-        if(Request.QueryString["UserID"] != null)
+        if(RouteData.Values["UserID"] != null)
         {
-            Response.Redirect("~/AdminPanel/Home.aspx", true);
+            Response.Redirect("~/AdminPanel/Home", true);
         }
         else
         {
-            Response.Redirect("~/Login.aspx", true);
+            Response.Redirect("~/Signin", true);
         }
     }
 }

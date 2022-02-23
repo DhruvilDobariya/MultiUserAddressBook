@@ -15,7 +15,7 @@
                 <asp:Label ID="lblMsg" runat="server"></asp:Label>
             </div>
             <div class="col-md-4 d-flex justify-content-end p-2">
-                <asp:HyperLink runat="server" ID="btnAddCountry" NavigateUrl="~/AdminPanel/Contact/ContactAddEdit.aspx" CssClass="btn btn-danger">
+                <asp:HyperLink runat="server" ID="btnAddCountry" NavigateUrl="~/AdminPanel/Contact/Add" CssClass="btn btn-danger">
                     <i class="fas fa-plus"></i>
                     Add Contact
                 </asp:HyperLink>
@@ -26,7 +26,7 @@
                 <Columns>
                     <asp:TemplateField HeaderText="Edit">
                         <ItemTemplate>
-                            <asp:HyperLink runat="server" ID="hlEdit" NavigateUrl='<%# "~/AdminPanel/Contact/ContactAddEdit.aspx?ContactID=" + Eval("ContactID").ToString().Trim() %>' CssClass="btn btn-gradient">
+                            <asp:HyperLink runat="server" ID="hlEdit" NavigateUrl='<%# "~/AdminPanel/Contact/Edit/" + Eval("ContactID").ToString().Trim() %>' CssClass="btn btn-gradient">
                             <i class="fas fa-edit"></i>
                             </asp:HyperLink>
                         </ItemTemplate>
@@ -42,7 +42,7 @@
                     <asp:BoundField DataField="ContactName" HeaderText="Name" />
                     <asp:TemplateField HeaderText="Contact Categories" ItemStyle-CssClass="text-center">
                         <ItemTemplate>
-                            <asp:HyperLink runat="server" ID="hlContactWiseContactCategory" NavigateUrl='<%# "~/AdminPanel/Contact/ContactWiseContactCategoryList.aspx?ContactID=" + Eval("ContactID").ToString().Trim() %>' CssClass="btn btn-gradient">
+                            <asp:HyperLink runat="server" ID="hlContactWiseContactCategory" NavigateUrl='<%# "~/AdminPanel/Contact/" + Eval("ContactID").ToString().Trim() + "/ContactCategory" %>' CssClass="btn btn-gradient">
                             <i class="fas fa-eye"></i>
                             </asp:HyperLink>
                         </ItemTemplate>

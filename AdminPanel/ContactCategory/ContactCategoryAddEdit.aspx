@@ -18,7 +18,7 @@
                 </div>
                 <div>
                     <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-gradient mx-1 my-2" Text="Add" OnClick="btnSubmit_Click" />
-                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-danger mx-1 my-2" NavigateUrl="~/AdminPanel/ContactCategory/ContactCategoryList.aspx">Back</asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-danger mx-1 my-2" NavigateUrl="~/AdminPanel/ContactCategory/List">Back</asp:HyperLink>
                     <asp:Label ID="lblMsg" runat="server" ></asp:Label>
                 </div>
             </form>

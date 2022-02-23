@@ -16,11 +16,11 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
     {
         if (!Page.IsPostBack)
         {
-            if (Request.QueryString["ContactCategoryID"] != null)
+            if (RouteData.Values["ContactCategoryID"] != null)
             {
                 lblTitle.Text = "Edit Contact Category";
                 btnSubmit.Text = "Edit";
-                FillControlls(Convert.ToInt32(Request.QueryString["ContactCategoryID"]));
+                FillControlls(Convert.ToInt32(RouteData.Values["ContactCategoryID"]));
             }
         }
     }
@@ -60,13 +60,13 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             #endregion Create Command and Set Parameters
 
-            if (Request.QueryString["ContactCategoryID"] != null)
+            if (RouteData.Values["ContactCategoryID"] != null)
             {
                 #region Update record
                 objCmd.CommandText = "PR_ContactCategory_UpdateByPKUserID";
-                objCmd.Parameters.AddWithValue("@ContactCategoryID", Convert.ToString(Request.QueryString["ContactCategoryID"]));
+                objCmd.Parameters.AddWithValue("@ContactCategoryID", Convert.ToString(RouteData.Values["ContactCategoryID"]));
                 objCmd.ExecuteNonQuery();
-                Response.Redirect("~/AdminPanel/ContactCategory/ContactCategoryList.aspx");
+                Response.Redirect("~/AdminPanel/ContactCategory/List");
                 #endregion Update record
             }
             else

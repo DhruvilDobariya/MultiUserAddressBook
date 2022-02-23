@@ -15,7 +15,7 @@
                 <asp:Label ID="lblMsg" runat="server"></asp:Label>
             </div>
             <div class="col-md-4 d-flex justify-content-end p-2">
-                <asp:HyperLink runat="server" ID="btnAddCountry" NavigateUrl="~/AdminPanel/City/CityAddEdit.aspx" CssClass="btn btn-danger">
+                <asp:HyperLink runat="server" ID="btnAddCountry" NavigateUrl="~/AdminPanel/City/Add" CssClass="btn btn-danger">
                     <i class="fas fa-plus"></i>
                     Add City
                 </asp:HyperLink>
@@ -25,7 +25,7 @@
             <Columns>
                 <asp:TemplateField HeaderText="Edit">
                     <ItemTemplate>
-                        <asp:HyperLink runat="server" ID="hlEdit" CssClass="btn btn-gradient" NavigateUrl='<%# "~/AdminPanel/City/CityAddEdit.aspx?CityID=" + Eval("CityID").ToString().Trim() %>'>
+                        <asp:HyperLink runat="server" ID="hlEdit" CssClass="btn btn-gradient" NavigateUrl='<%# "~/AdminPanel/City/Edit/" + Eval("CityID").ToString().Trim() %>'>
                             <i class="fas fa-edit"></i>
                         </asp:HyperLink>
                     </ItemTemplate>

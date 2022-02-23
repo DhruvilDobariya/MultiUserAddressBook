@@ -16,11 +16,11 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
     {
         if (!Page.IsPostBack)
         {
-            if (Request.QueryString["CountryID"] != null)
+            if (RouteData.Values["CountryID"] != null)
             {
                 btnSubmit.Text = "Edit";
                 lblTitle.Text = "Edit Country";
-                FillControlls(Convert.ToInt32(Request.QueryString["CountryID"]));
+                FillControlls(Convert.ToInt32(RouteData.Values["CountryID"]));
             }
         }
     }
@@ -74,13 +74,13 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             #endregion Create Command and Set Parameters
 
-            if (Request.QueryString["CountryID"] != null)
+            if (RouteData.Values["CountryID"] != null)
             {
                 #region Update record
                 objCmd.CommandText = "PR_Country_UpdateByPKUserID";
-                objCmd.Parameters.AddWithValue("@CountryID", Convert.ToInt32(Request.QueryString["CountryID"]));
+                objCmd.Parameters.AddWithValue("@CountryID", Convert.ToInt32(RouteData.Values["CountryID"]));
                 objCmd.ExecuteNonQuery();
-                Response.Redirect("~/AdminPanel/Country/CountryList.aspx");
+                Response.Redirect("~/AdminPanel/Country/List");
                 #endregion Update record
             }
             else

@@ -76,7 +76,7 @@ public partial class AdminPanel_Login : System.Web.UI.Page
                         Session["DisplayName"] = objSDR["DisplayName"].ToString().Trim();
                     break;
                 }
-                Response.Redirect("~/AdminPanel/Home.aspx");
+                Response.Redirect("~/AdminPanel/Home");
             }
             else
             {

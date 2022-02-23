@@ -33,19 +33,19 @@
                     <div class="collapse navbar-collapse ms-5" id="navbarColor02">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
-                                <asp:HyperLink ID="hlCountry" runat="server" NavigateUrl="~/AdminPanel/Country/CountryList.aspx" CssClass="nav-link">Country</asp:HyperLink>
+                                <asp:HyperLink ID="hlCountry" runat="server" NavigateUrl="~/AdminPanel/Country/List" CssClass="nav-link">Country</asp:HyperLink>
                             </li>
                             <li class="nav-item">
-                                <asp:HyperLink ID="hlState" runat="server" NavigateUrl="~/AdminPanel/State/StateList.aspx" CssClass="nav-link">State</asp:HyperLink>
+                                <asp:HyperLink ID="hlState" runat="server" NavigateUrl="~/AdminPanel/State/List" CssClass="nav-link">State</asp:HyperLink>
                             </li>
                             <li class="nav-item">
-                                <asp:HyperLink ID="hlCity" runat="server" NavigateUrl="~/AdminPanel/City/CityList.aspx" CssClass="nav-link">City</asp:HyperLink>
+                                <asp:HyperLink ID="hlCity" runat="server" NavigateUrl="~/AdminPanel/City/List" CssClass="nav-link">City</asp:HyperLink>
                             </li>
                             <li class="nav-item">
-                                <asp:HyperLink ID="hlContactCategory" runat="server" NavigateUrl="~/AdminPanel/ContactCategory/ContactCategoryList.aspx" CssClass="nav-link">ContactCategory</asp:HyperLink>
+                                <asp:HyperLink ID="hlContactCategory" runat="server" NavigateUrl="~/AdminPanel/ContactCategory/List" CssClass="nav-link">ContactCategory</asp:HyperLink>
                             </li>
                             <li class="nav-item">
-                                <asp:HyperLink ID="hlContact" runat="server" NavigateUrl="~/AdminPanel/Contact/ContactList.aspx" CssClass="nav-link">Contact</asp:HyperLink>
+                                <asp:HyperLink ID="hlContact" runat="server" NavigateUrl="~/AdminPanel/Contact/List" CssClass="nav-link">Contact</asp:HyperLink>
                             </li>
                         </ul>
                     </div>
@@ -62,9 +62,7 @@
                             </li>
                             <li><hr class="dropdown-divider"></li>--%>
                             <li>
-                                <asp:LinkButton runat="server" ID="btnUserUpdateDetail" NavigateUrl='<%# "~/UserAddEdit.aspx?UserID=" +
-                                        Session["UserID"]%>'
-                                    CssClass="dropdown-item" OnClick="btnUserUpdateDetail_Click">Edit User Detail</asp:LinkButton>
+                                <asp:LinkButton runat="server" ID="btnUserUpdateDetail" CssClass="dropdown-item" OnClick="btnUserUpdateDetail_Click">Edit User Detail</asp:LinkButton>
                             </li>
                             <li>
                                 <hr class="dropdown-divider">

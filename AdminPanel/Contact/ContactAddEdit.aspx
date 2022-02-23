@@ -24,21 +24,21 @@
 
                     <div class="col-md-6">
                         <asp:Label runat="server" ID="lblCountry" CssClass="form-lable m-1">Select Country Name</asp:Label>
-                        <asp:DropDownList ID="ddCountry" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddCountry_SelectedIndexChanged"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Please Select Country" ControlToValidate="ddCountry" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlCountry" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddCountry_SelectedIndexChanged"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Please Select Country" ControlToValidate="ddlCountry" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
                     </div>
 
                 </div>
                 <div class="row mt-2">
                     <div class="col-md-6">
                         <asp:Label runat="server" ID="lblState" CssClass="form-lable m-1">Select State Name</asp:Label>
-                        <asp:DropDownList ID="ddState" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddState_SelectedIndexChanged"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="rfvState" runat="server" ErrorMessage="Please Select State" ControlToValidate="ddState" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlState" runat="server" CssClass="form-select" AutoPostBack="True" OnSelectedIndexChanged="ddState_SelectedIndexChanged"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="rfvState" runat="server" ErrorMessage="Please Select State" ControlToValidate="ddlState" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
                     </div>
                     <div class="col-md-6">
                         <asp:Label runat="server" ID="lblCity" CssClass="form-lable m-1">Select City Name</asp:Label>
-                        <asp:DropDownList ID="ddCity" runat="server" CssClass="form-select"></asp:DropDownList>
-                        <asp:RequiredFieldValidator ID="rfvCity" runat="server" ErrorMessage="Please Select City" ControlToValidate="ddCity" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
+                        <asp:DropDownList ID="ddlCity" runat="server" CssClass="form-select"></asp:DropDownList>
+                        <asp:RequiredFieldValidator ID="rfvCity" runat="server" ErrorMessage="Please Select City" ControlToValidate="ddlCity" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
                     </div>
                 </div>
                 <div class="row mt-2">
@@ -101,7 +101,7 @@
 
                 <div>
                     <asp:Button runat="server" ID="btnSubmit" CssClass="btn btn-gradient mx-1 my-2" Text="Add" OnClick="btnSubmit_Click" />
-                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-danger mx-1 my-2" NavigateUrl="~/AdminPanel/Contact/ContactList.aspx">Back</asp:HyperLink>
+                    <asp:HyperLink runat="server" ID="btnBack" CssClass="btn btn-danger mx-1 my-2" NavigateUrl="~/AdminPanel/Contact/List">Back</asp:HyperLink>
                     <asp:Label ID="lblMsg" runat="server"></asp:Label>
                 </div>
             </form>
