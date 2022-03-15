@@ -115,6 +115,7 @@ public partial class UserAddEdit : System.Web.UI.Page
                 if (Session["UserID"] != null)
                     objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
                 objCmd.ExecuteNonQuery();
+                Session["Success"] = "User Updated Successfully";
                 Response.Redirect("~/AdminPanel/Home");
                 #endregion Update record
             }
@@ -135,7 +136,7 @@ public partial class UserAddEdit : System.Web.UI.Page
         {
             if (ex.Message.Contains("Cannot insert duplicate key row in object 'dbo.User' with unique index 'IX_User'"))
             {
-                lblMsg.Text = "This Username already exist";
+                Session["Error"] = "Username already exist";
             }
             else
             {

@@ -6,7 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 
 public partial class Content_AddressBook : System.Web.UI.MasterPage
-{
+{    
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!Page.IsPostBack)

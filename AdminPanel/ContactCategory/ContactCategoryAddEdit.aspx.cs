@@ -66,6 +66,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
                 objCmd.CommandText = "PR_ContactCategory_UpdateByPKUserID";
                 objCmd.Parameters.AddWithValue("@ContactCategoryID", Convert.ToString(RouteData.Values["ContactCategoryID"]));
                 objCmd.ExecuteNonQuery();
+                Session["Success"] = "Contact Category updated successfully";
                 Response.Redirect("~/AdminPanel/ContactCategory/List");
                 #endregion Update record
             }
@@ -74,7 +75,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
                 #region Add record
                 objCmd.CommandText = "PR_ContactCategory_InsertUserID";
                 objCmd.ExecuteNonQuery();
-                lblMsg.Text = "Contact Category Added Successfully";
+                Session["Success"] = "Contact Category added successfully";
                 txtContactCategory.Text = "";
                 txtContactCategory.Focus();
                 #endregion Add record
@@ -88,7 +89,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
         {
             if (ex.Message.Contains("Cannot insert duplicate key row in object 'dbo.ContactCategory' with unique index 'IX_ContactCategory'."))
             {
-                lblMsg.Text = "Contact Category alrady exist!";
+                Session["Error"] = "Contact Category alrady exist!";
             }
             else
             {

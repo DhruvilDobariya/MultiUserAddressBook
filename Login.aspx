@@ -42,7 +42,7 @@
 				</div>
 				
 				<div class="form-floating">
-					<asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="Password"></asp:TextBox>
+					<asp:TextBox ID="txtPassword" runat="server" CssClass="form-control" placeholder="Password" TextMode="Password"></asp:TextBox>
 					<label for="floatingPassword">Password</label>
 					<asp:RequiredFieldValidator ID="rfvPassword" runat="server" ErrorMessage="Please Enter Password" ControlToValidate="txtPassword" Display="None" ForeColor="Red"></asp:RequiredFieldValidator>
 				</div>

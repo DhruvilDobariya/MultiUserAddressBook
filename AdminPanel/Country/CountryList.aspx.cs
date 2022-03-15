@@ -93,13 +93,13 @@ public partial class AdminPanel_Country_Read : System.Web.UI.Page
             if (objConn.State == ConnectionState.Open)
                 objConn.Close();
 
-            lblMsg.Text = "Country Deleted Successfully!";
+            Session["Success"] = "Country deleted successfully!";
         }
         catch (Exception ex)
         {
             if (ex.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
             {
-                lblMsg.Text = "This Country contain some records, So please delete these record, If you want to delete this country.";
+                Session["Error"] = "This Country contain some records, So please delete these record, If you want to delete this country.";
             }
             else
             {

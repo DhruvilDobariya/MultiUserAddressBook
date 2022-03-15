@@ -110,7 +110,7 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
             if (Session["UserID"] != null)
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             objCmd.ExecuteNonQuery();
-            
+            Session["Success"] = "Countact deleted successfully";
             #endregion Create Command and Set Parameters
 
             if (objConn.State == ConnectionState.Open)
@@ -152,11 +152,11 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
             if (file.Exists)
             {
                 file.Delete();
-                lblMsg.Text = "Image Deleted Successfully!";
+                Session["Success"] = "Image deleted successfully!";
             }
             else
             {
-                lblMsg.Text = "Image dosen't upload!";
+                Session["Error"] = "Image not found";
             }
 
             
@@ -197,14 +197,13 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
             if (Session["UserID"] != null)
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             objCmd.ExecuteNonQuery();
-            lblMsg.Text = "Contact Deleted Successfully!";
             if (objConn.State == ConnectionState.Open)
                 objConn.Close();
 
         }
         catch (Exception ex)
         {
-            lblMsg.Text = ex.Message + ex;
+            lblMsg.Text = ex.Message;
         }
         finally
         {

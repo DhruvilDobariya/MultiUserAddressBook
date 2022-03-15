@@ -215,12 +215,13 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                     }
                     else
                     {
-                        lblMsg.Text = "Please Upload Valid File(File must have .jpg or .jpge or .png or .gif extention).";
+                        Session["Error"] = "Please Upload Valid File(File must have .jpg or .jpge or .png or .gif extention).";
                         return;
                     }
                 }
                 DeleteContactCategory(Convert.ToInt32(RouteData.Values["ContactID"]));
                 AddContactCategory(Convert.ToInt32(RouteData.Values["ContactID"]));
+                Session["Success"] = "Contact updated successfully";
                 Response.Redirect("~/AdminPanel/Contact/List");
                 #endregion Update record
             }
@@ -240,12 +241,12 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                     }
                     else
                     {
-                        lblMsg.Text = "Please Upload Valid File(File must have .jpg or .jpge or .png or .gif extention).";
+                        Session["Error"] = "Please Upload Valid File(File must have .jpg or .jpge or .png or .gif extention).";
                         return;
                     }
                 }
                 AddContactCategory(ContactID);
-                //lblMsg.Text = "Contact Added Successfully";
+                Session["Success"] = "Contact added successfully";
                 ClearControls();
                 
                 #endregion Add record
@@ -345,6 +346,11 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                     if (!objSDR["Address"].Equals(DBNull.Value))
                     {
                         txtAddress.Text = objSDR["Address"].ToString();
+                    }
+                    if (!objSDR["FilePath"].Equals(DBNull.Value))
+                    {
+                        imgImage.ImageUrl = objSDR["FilePath"].ToString();
+                        imgImage.Visible = true;
                     }
                     break;
                 }
@@ -506,8 +512,6 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                 }
             }
 
-            lblMsg.Text = "Contact Added Successfully";
-
             if (objConn.State == ConnectionState.Open)
                 objConn.Close();
 
@@ -613,4 +617,5 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
         }
     }
     #endregion Fill Contact Category CheckBoxs
+
 }

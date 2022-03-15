@@ -93,6 +93,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
                 objCmd.CommandText = "PR_City_UpdateByPKUserID";
                 objCmd.Parameters.AddWithValue("@CityID", Convert.ToString(RouteData.Values["CityID"]));
                 objCmd.ExecuteNonQuery();
+                Session["Success"] = "City updated successfully";
                 Response.Redirect("~/AdminPanel/City/List");
                 #endregion Update record
             }
@@ -101,7 +102,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
                 #region Add record
                 objCmd.CommandText = "PR_City_InsertUserID";
                 objCmd.ExecuteNonQuery();
-                lblMsg.Text = "City Added Successfully";
+                Session["Success"] = "City added successfully";
                 txtCity.Text = txtPin.Text = txtSTD.Text = "";
                 ddlState.SelectedIndex = -1;
                 #endregion Add record
@@ -115,7 +116,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
         {
             if (ex.Message.Contains("Violation of UNIQUE KEY constraint 'UK_City_CityName_UserID'. Cannot insert duplicate key in object 'dbo.City'."))
             {
-                lblMsg.Text = "City alrady exist!";
+                Session["Error"] = "City alrady exist!";
             }
             else
             {

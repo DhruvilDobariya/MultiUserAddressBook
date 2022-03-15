@@ -61,7 +61,7 @@
                     <asp:BoundField DataField="Address" HeaderText="Address" />
                     <asp:TemplateField HeaderText="Image">
                         <ItemTemplate>
-                            <asp:Image runat="server" ID="imgImage" CssClass="img-fluid me-4" AlternateText="Image dosen't upload or found!" Height="50" ImageUrl='<%# Eval("FilePath") %>' />
+                            <asp:Image runat="server" ID="imgImage" CssClass="img-fluid me-4" AlternateText="Image not found" Height="50" ImageUrl='<%# Eval("FilePath") %>' />
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Delete Image" ItemStyle-CssClass="text-center">

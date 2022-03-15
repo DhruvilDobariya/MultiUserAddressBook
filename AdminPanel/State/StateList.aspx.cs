@@ -89,7 +89,7 @@ public partial class AdminPanel_State_StateList : System.Web.UI.Page
             if (Session["UserID"] != null)
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             objCmd.ExecuteNonQuery();
-            lblMsg.Text = "State Deleted Successfully!";
+            Session["Success"] = "State deleted successfully!";
             #endregion Create Command and Set Parameters
 
             if (objConn.State == ConnectionState.Open)
@@ -99,7 +99,7 @@ public partial class AdminPanel_State_StateList : System.Web.UI.Page
         {
             if (ex.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
             {
-                lblMsg.Text = "This State contain some records, So please delete these record, If you want to delete this state.";
+                Session["Error"] = "This State contain some records, So please delete these record, If you want to delete this state.";
             }
             else
             {

@@ -80,6 +80,7 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
                 objCmd.CommandText = "PR_Country_UpdateByPKUserID";
                 objCmd.Parameters.AddWithValue("@CountryID", Convert.ToInt32(RouteData.Values["CountryID"]));
                 objCmd.ExecuteNonQuery();
+                Session["Success"] = "Country updated successfully";
                 Response.Redirect("~/AdminPanel/Country/List");
                 #endregion Update record
             }
@@ -88,7 +89,7 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
                 #region Add record
                 objCmd.CommandText = "PR_Country_InsertUserID";
                 objCmd.ExecuteNonQuery();
-                lblMsg.Text = "Country Added Successfully";
+                Session["Success"] = "Country added successfully";
                 txtCountry.Text = "";
                 txtCode.Text = "";
                 txtCountry.Focus();
@@ -103,7 +104,7 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
         {
             if (ex.Message.Contains("Violation of UNIQUE KEY constraint 'UK_Country_CountryName_UserID'. Cannot insert duplicate key in object 'dbo.Country'."))
             {
-                lblMsg.Text = "Country alrady exist!";
+                Session["Error"] = "Country alrady exist!";
             }
             else
             {

@@ -90,7 +90,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryList : System.Web
             if (Session["UserID"] != null)
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             objCmd.ExecuteNonQuery();
-            lblMsg.Text = "Contact Category Deleted Successfully!";
+            Session["Success"] = "Contact Category deleted successfully!";
             #endregion Create Command and Set Parameters
 
             if (objConn.State == ConnectionState.Open)
@@ -100,7 +100,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryList : System.Web
         {
             if (ex.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
             {
-                lblMsg.Text = "This Contact Category contain some records, So please delete these record, If you want to delete this Contact Category.";
+                Session["Error"] = "This Contact Category contain some records, So please delete these record, If you want to delete this Contact Category.";
             }
             else
             {

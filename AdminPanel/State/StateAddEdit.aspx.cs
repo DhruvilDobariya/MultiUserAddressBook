@@ -110,6 +110,7 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
                 objCmd.CommandText = "PR_State_UpdateByPKUserID";
                 objCmd.Parameters.AddWithValue("@StateID", Convert.ToString(RouteData.Values["StateID"]));
                 objCmd.ExecuteNonQuery();
+                Session["Success"] = "State updated successfully";
                 Response.Redirect("~/AdminPanel/State/List");
                 #endregion Update record
             }
@@ -118,7 +119,7 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
                 #region Add record
                 objCmd.CommandText = "PR_State_InsertUserID";
                 objCmd.ExecuteNonQuery();
-                lblMsg.Text = "State Added Successfully";
+                Session["Success"] = "State added successfully";
                 txtState.Text = txtCode.Text = "";
                 ddlCountry.SelectedIndex = -1;
                 txtState.Focus();
@@ -133,7 +134,7 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
         {
             if (ex.Message.Contains("Violation of UNIQUE KEY constraint 'UK_State_StateName_UserID'."))
             {
-                lblMsg.Text = "State alrady exist!";
+                Session["Error"] = "State alrady exist!";
             }
             else
             {

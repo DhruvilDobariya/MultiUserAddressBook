@@ -90,7 +90,7 @@ public partial class AdminPanel_City_CityList : System.Web.UI.Page
             if (Session["UserID"] != null)
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             objCmd.ExecuteNonQuery();
-            lblMsg.Text = "City Deleted Successfully!";
+            Session["Success"] = "City deleted successfully!";
             #endregion Create Command and Set Parameters
 
             if (objConn.State == ConnectionState.Open)
@@ -100,7 +100,7 @@ public partial class AdminPanel_City_CityList : System.Web.UI.Page
         {
             if (ex.Message.Contains("The DELETE statement conflicted with the REFERENCE constraint"))
             {
-                lblMsg.Text = "This City contain some records, So please delete these record, If you want to delete this city.";
+                Session["Error"] = "This City contain some records, So please delete these record, If you want to delete this city.";
             }
             else
             {

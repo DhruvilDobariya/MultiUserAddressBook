@@ -11,7 +11,7 @@
         </div>
         <div class="mt-3">
             <form>
-                <div>
+                <div class="row">
                     <asp:Label runat="server" ID="lblContact" CssClass="form-lable m-1">Enter Contact Name</asp:Label>
                     <asp:TextBox ID="txtContact" runat="server" CssClass="form-control m-1"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvContact" runat="server" ErrorMessage="Please Enter Contact Name" ControlToValidate="txtContact" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
@@ -87,15 +87,22 @@
                         <asp:TextBox ID="txtLinkedin" runat="server" CssClass="form-control m-1" TextMode="Url"></asp:TextBox>
                     </div>
                 </div>
+                
                 <div class="row mt-2">
-                    <div class="col-md-6 pe-4">
-                        <asp:Label runat="server" ID="lblAddress" CssClass="form-lable m-1">Enter Your Address</asp:Label>
+                    <div class="col-md-12 pe-3 ps-2">
+                        <asp:Label runat="server" ID="lblAddress" CssClass="form-lable m-1 ps-1">Enter Your Address</asp:Label>
                         <asp:TextBox ID="txtAddress" CssClass="form-control m-1 ms-2 me-4" runat="server" Rows="4" TextMode="MultiLine"></asp:TextBox>
                         <asp:RequiredFieldValidator ID="rfvAddress" runat="server" ErrorMessage="Please Enter Address" ControlToValidate="txtAddress" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                     </div>
+                </div>
+
+                <div class="row mt-2">
                     <div class="col-md-6">
-                        <asp:Label runat="server" ID="lblFile" CssClass="form-lable m-1">Enter Document</asp:Label>
-                        <asp:FileUpload runat="server" ID="fuFile" CssClass="form-control m-1 ms-3 me-4" />
+                        <asp:Label runat="server" ID="lblFile" onchange="fuFileChenge" CssClass="form-lable m-1">Enter Document</asp:Label>
+                        <asp:FileUpload runat="server" ID="fuFile" onChange="uploadImage()" CssClass="form-control m-1" />
+                    </div>
+                    <div class="col-md-6 text-center">
+                        <asp:Image ID="imgImage" CssClass="border border-4 rounded-circle" Visible="false" runat="server" Width="100" />
                     </div>
                 </div>
 
@@ -108,3 +115,5 @@
         </div>
     </div>
 </asp:Content>
+
+
