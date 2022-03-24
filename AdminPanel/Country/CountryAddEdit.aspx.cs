@@ -20,7 +20,7 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
             {
                 btnSubmit.Text = "Edit";
                 lblTitle.Text = "Edit Country";
-                FillControlls(Convert.ToInt32(RouteData.Values["CountryID"]));
+                FillControlls(Convert.ToInt32(EncryptionDecryption.Decode(RouteData.Values["CountryID"].ToString())));
             }
         }
     }
@@ -74,11 +74,11 @@ public partial class AdminPanel_Country_CountryAddEdit : System.Web.UI.Page
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             #endregion Create Command and Set Parameters
 
-            if (RouteData.Values["CountryID"] != null)
+            if (EncryptionDecryption.Decode(RouteData.Values["CountryID"].ToString()) != null)
             {
                 #region Update record
                 objCmd.CommandText = "PR_Country_UpdateByPKUserID";
-                objCmd.Parameters.AddWithValue("@CountryID", Convert.ToInt32(RouteData.Values["CountryID"]));
+                objCmd.Parameters.AddWithValue("@CountryID", Convert.ToInt32(EncryptionDecryption.Decode(RouteData.Values["CountryID"].ToString())));
                 objCmd.ExecuteNonQuery();
                 Session["Success"] = "Country updated successfully";
                 Response.Redirect("~/AdminPanel/Country/List");

@@ -16,7 +16,7 @@ public partial class UserAddEdit : System.Web.UI.Page
         lblMsg.Text = "";
         if (!Page.IsPostBack)
         {
-            if (RouteData.Values["UserID"] != null && RouteData.Values["UserID"].ToString() == Session["UserID"].ToString())
+            if (RouteData.Values["UserID"] != null && EncryptionDecryption.Decode(RouteData.Values["UserID"].ToString()).ToString() == Session["UserID"].ToString())
             {
                 FillControlls();
                 btnSubmit.Text = "Edit";
@@ -108,7 +108,7 @@ public partial class UserAddEdit : System.Web.UI.Page
             objCmd.Parameters.AddWithValue("@Email", strEmail);
             objCmd.Parameters.AddWithValue("@MobileNo", strMobileNo);
             #endregion Create Command and Set Parameters
-            if (RouteData.Values["UserID"] != null)
+            if (EncryptionDecryption.Decode(RouteData.Values["UserID"].ToString()) != null)
             {
                 #region Update record
                 objCmd.CommandText = "PR_User_UpdateByPK";

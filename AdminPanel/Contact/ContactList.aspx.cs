@@ -37,7 +37,7 @@ public partial class AdminPanel_Contact_ContactList : System.Web.UI.Page
             SqlCommand objCmd = new SqlCommand();
             objCmd.Connection = objConn;
             objCmd.CommandType = CommandType.StoredProcedure;
-            objCmd.CommandText = "PR_Contact_SelectAllUserID";
+            objCmd.CommandText = "PR_ContactWiseContactCategory_SelectAll";
             if (Session["UserID"] != null)
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             SqlDataReader objSDR = objCmd.ExecuteReader();

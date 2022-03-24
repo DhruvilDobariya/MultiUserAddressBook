@@ -21,7 +21,7 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
             {
                 lblTitle.Text = "Edit City";
                 btnSubmit.Text = "Edit";
-                FillControlls(Convert.ToInt32(RouteData.Values["CityID"]));
+                FillControlls(Convert.ToInt32(EncryptionDecryption.Decode(RouteData.Values["CityID"].ToString())));
             }
         }
     }
@@ -87,11 +87,11 @@ public partial class AdminPanel_City_CityAddEdit : System.Web.UI.Page
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             #endregion Create Command and Set Parameters
 
-            if (RouteData.Values["CityID"] != null)
+            if (EncryptionDecryption.Decode(RouteData.Values["CityID"].ToString()) != null)
             {
                 #region Update record
                 objCmd.CommandText = "PR_City_UpdateByPKUserID";
-                objCmd.Parameters.AddWithValue("@CityID", Convert.ToString(RouteData.Values["CityID"]));
+                objCmd.Parameters.AddWithValue("@CityID", Convert.ToString(EncryptionDecryption.Decode(RouteData.Values["CityID"].ToString())));
                 objCmd.ExecuteNonQuery();
                 Session["Success"] = "City updated successfully";
                 Response.Redirect("~/AdminPanel/City/List");

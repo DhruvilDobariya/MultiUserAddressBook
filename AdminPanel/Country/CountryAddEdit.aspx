@@ -12,7 +12,7 @@
         <div class="mt-3">
             <form>
                 <div>
-                    <label class="form-lable m-1">Enter Country Name</label>
+                    <label class="form-lable m-1">Enter Country Name<span class="text-danger">*</span></label>
                     <asp:TextBox ID="txtCountry" runat="server" class="form-control m-1"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Please Enter Country" ControlToValidate="txtCountry" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>

@@ -12,12 +12,12 @@
         <div class="mt-3">
             <form>
                 <div>
-                    <label class="form-lable m-1">Enter City Name</label>
+                    <label class="form-lable m-1">Enter City Name<span class="text-danger">*</span></label>
                     <asp:TextBox ID="txtCity" runat="server" CssClass="form-control m-1"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvCity" runat="server" ErrorMessage="Please Enter City" ControlToValidate="txtCity" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div>
-                    <label class="form-lable m-1">Select State Name</label>
+                    <label class="form-lable m-1">Select State Name<span class="text-danger">*</span></label>
                     <asp:DropDownList ID="ddlState" runat="server" CssClass="form-select"></asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvState" runat="server" ErrorMessage="Please Select State" ControlToValidate="ddlState" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
                 </div>

@@ -25,14 +25,14 @@
             <Columns>
                 <asp:TemplateField HeaderText="Edit">
                     <ItemTemplate>
-                        <asp:HyperLink runat="server" ID="hlEdit" CssClass="btn btn-gradient" NavigateUrl='<%# "~/AdminPanel/City/Edit/" + Eval("CityID").ToString().Trim() %>'>
+                        <asp:HyperLink runat="server" ID="hlEdit" CssClass="btn btn-gradient" NavigateUrl='<%# "~/AdminPanel/City/Edit/" + EncryptionDecryption.Encode(Eval("CityID").ToString().Trim()) %>'>
                             <i class="fas fa-edit"></i>
                         </asp:HyperLink>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Delete">
                     <ItemTemplate>
-                        <asp:LinkButton runat="server" ID="btnDelete" CssClass="btn btn-danger" CommandName="DeleteRecord" CommandArgument='<%# Eval("CityID").ToString() %>'>
+                        <asp:LinkButton runat="server" ID="btnDelete" CssClass="btn btn-danger" OnClientClick="return confirm('Are you sure you want to delete city?')" CommandName="DeleteRecord" CommandArgument='<%# Eval("CityID").ToString() %>'>
                              <i class="fas fa-trash-alt"></i>
                         </asp:LinkButton>
                     </ItemTemplate>

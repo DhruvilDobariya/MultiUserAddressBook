@@ -24,7 +24,7 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             {
                 lblTitle.Text = "Edit Contact";
                 btnSubmit.Text = "Edit";
-                FillControls(Convert.ToInt32(RouteData.Values["ContactID"]));
+                FillControls(Convert.ToInt32(EncryptionDecryption.Decode(RouteData.Values["ContactID"].ToString())));
                 FillStateForDropDown();
                 FillCityForDropDown();
             }
@@ -200,18 +200,18 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
             #endregion Create Command and Set Parameters
 
 
-            if (RouteData.Values["ContactID"] != null)
+            if (EncryptionDecryption.Decode(RouteData.Values["ContactID"].ToString()) != null)
             {
                 #region Update record
                 objCmd.CommandText = "PR_Contact_UpdateByPKUserID";
-                objCmd.Parameters.AddWithValue("@ContactID", Convert.ToInt32(RouteData.Values["ContactID"]));
+                objCmd.Parameters.AddWithValue("@ContactID", Convert.ToInt32(EncryptionDecryption.Decode(RouteData.Values["ContactID"].ToString())));
                 objCmd.ExecuteNonQuery();
                 string FileType = Path.GetExtension(fuFile.FileName).ToLower();
                 if (fuFile.HasFile)
                 {
                     if (FileType == ".jpge" || FileType == ".jpg" || FileType == ".png" || FileType == ".gif")
                     {
-                        UploadImage(Convert.ToInt32(RouteData.Values["ContactID"]), "Image");
+                        UploadImage(Convert.ToInt32(EncryptionDecryption.Decode(RouteData.Values["ContactID"].ToString())), "Image");
                     }
                     else
                     {
@@ -219,8 +219,8 @@ public partial class AdminPanel_Contact_ContactAddEdit : System.Web.UI.Page
                         return;
                     }
                 }
-                DeleteContactCategory(Convert.ToInt32(RouteData.Values["ContactID"]));
-                AddContactCategory(Convert.ToInt32(RouteData.Values["ContactID"]));
+                DeleteContactCategory(Convert.ToInt32(EncryptionDecryption.Decode(RouteData.Values["ContactID"].ToString())));
+                AddContactCategory(Convert.ToInt32(EncryptionDecryption.Decode(RouteData.Values["ContactID"].ToString())));
                 Session["Success"] = "Contact updated successfully";
                 Response.Redirect("~/AdminPanel/Contact/List");
                 #endregion Update record

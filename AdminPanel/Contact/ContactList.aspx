@@ -26,27 +26,21 @@
                 <Columns>
                     <asp:TemplateField HeaderText="Edit">
                         <ItemTemplate>
-                            <asp:HyperLink runat="server" ID="hlEdit" NavigateUrl='<%# "~/AdminPanel/Contact/Edit/" + Eval("ContactID").ToString().Trim() %>' CssClass="btn btn-gradient">
+                            <asp:HyperLink runat="server" ID="hlEdit" NavigateUrl='<%# "~/AdminPanel/Contact/Edit/" + EncryptionDecryption.Encode(Eval("ContactID").ToString().Trim()) %>' CssClass="btn btn-gradient">
                             <i class="fas fa-edit"></i>
                             </asp:HyperLink>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Delete">
                         <ItemTemplate>
-                            <asp:LinkButton runat="server" ID="btnDelete" CssClass="btn btn-danger" CommandName="DeleteRecord" CommandArgument='<%# Eval("ContactID").ToString() %>'>
+                            <asp:LinkButton runat="server" ID="btnDelete" CssClass="btn btn-danger" OnClientClick="return confirm('Are you sure you want to delete contact?')" CommandName="DeleteRecord" CommandArgument='<%# Eval("ContactID").ToString() %>'>
                              <i class="fas fa-trash-alt"></i>
                             </asp:LinkButton>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:BoundField DataField="ContactId" HeaderText="Id" />
                     <asp:BoundField DataField="ContactName" HeaderText="Name" />
-                    <asp:TemplateField HeaderText="Contact Categories" ItemStyle-CssClass="text-center">
-                        <ItemTemplate>
-                            <asp:HyperLink runat="server" ID="hlContactWiseContactCategory" NavigateUrl='<%# "~/AdminPanel/Contact/" + Eval("ContactID").ToString().Trim() + "/ContactCategory" %>' CssClass="btn btn-gradient">
-                            <i class="fas fa-eye"></i>
-                            </asp:HyperLink>
-                        </ItemTemplate>
-                    </asp:TemplateField>
+                    <asp:BoundField DataField="ContactCategoryName" HeaderText="Name" />
                     <asp:BoundField DataField="CityName" HeaderText="City Name" />
                     <asp:BoundField DataField="StateName" HeaderText="State Name" />
                     <asp:BoundField DataField="CountryName" HeaderText="Country Name" />

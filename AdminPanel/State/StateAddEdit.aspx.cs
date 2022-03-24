@@ -21,7 +21,7 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
             {
                 lblTitle.Text = "Edit State";
                 btnSubmit.Text = "Edit";
-                FillControlls(Convert.ToInt32(RouteData.Values["StateID"]));
+                FillControlls(Convert.ToInt32(EncryptionDecryption.Decode(RouteData.Values["StateID"].ToString())));
             }
         }
     }
@@ -104,11 +104,11 @@ public partial class AdminPanel_State_StateAddEdit : System.Web.UI.Page
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             #endregion Create Command and Set Parameters
 
-            if (RouteData.Values["StateID"] != null)
+            if (EncryptionDecryption.Decode(RouteData.Values["StateID"].ToString()) != null)
             {
                 #region Update record
                 objCmd.CommandText = "PR_State_UpdateByPKUserID";
-                objCmd.Parameters.AddWithValue("@StateID", Convert.ToString(RouteData.Values["StateID"]));
+                objCmd.Parameters.AddWithValue("@StateID", Convert.ToString(EncryptionDecryption.Decode(RouteData.Values["StateID"].ToString())));
                 objCmd.ExecuteNonQuery();
                 Session["Success"] = "State updated successfully";
                 Response.Redirect("~/AdminPanel/State/List");

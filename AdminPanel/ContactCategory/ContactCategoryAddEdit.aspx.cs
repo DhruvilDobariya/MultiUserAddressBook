@@ -20,7 +20,7 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
             {
                 lblTitle.Text = "Edit Contact Category";
                 btnSubmit.Text = "Edit";
-                FillControlls(Convert.ToInt32(RouteData.Values["ContactCategoryID"]));
+                FillControlls(Convert.ToInt32(EncryptionDecryption.Decode(RouteData.Values["ContactCategoryID"].ToString())));
             }
         }
     }
@@ -60,11 +60,11 @@ public partial class AdminPanel_ContactCategory_ContactCategoryAddEdit : System.
                 objCmd.Parameters.AddWithValue("@UserID", Convert.ToInt32(Session["UserID"]));
             #endregion Create Command and Set Parameters
 
-            if (RouteData.Values["ContactCategoryID"] != null)
+            if (EncryptionDecryption.Decode(RouteData.Values["ContactCategoryID"].ToString()) != null)
             {
                 #region Update record
                 objCmd.CommandText = "PR_ContactCategory_UpdateByPKUserID";
-                objCmd.Parameters.AddWithValue("@ContactCategoryID", Convert.ToString(RouteData.Values["ContactCategoryID"]));
+                objCmd.Parameters.AddWithValue("@ContactCategoryID", Convert.ToString(EncryptionDecryption.Decode(RouteData.Values["ContactCategoryID"].ToString())));
                 objCmd.ExecuteNonQuery();
                 Session["Success"] = "Contact Category updated successfully";
                 Response.Redirect("~/AdminPanel/ContactCategory/List");

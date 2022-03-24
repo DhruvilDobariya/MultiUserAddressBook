@@ -55,6 +55,6 @@ public partial class Content_AddressBook : System.Web.UI.MasterPage
 
     protected void btnUserUpdateDetail_Click(object sender, EventArgs e)
     {
-        Response.Redirect("~/User/Edit/" + Session["UserID"]);
+        Response.Redirect("~/User/Edit/" + EncryptionDecryption.Encode(Session["UserID"].ToString()));
     }
 }

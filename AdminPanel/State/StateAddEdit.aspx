@@ -12,17 +12,17 @@
         <div class="mt-3">
             <form>
                 <div>
-                    <label class="form-lable m-1">Enter State Name</label>
+                    <label class="form-lable m-1">Enter State Name<span class="text-danger">*</span></label>
                     <asp:TextBox ID="txtState" runat="server" CssClass="form-control m-1"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvState" runat="server" ErrorMessage="Please Enter State" ControlToValidate="txtState" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div>
-                    <label class="form-lable m-1">Enter State Code</label>
+                    <label class="form-lable m-1">Enter State Code<span class="text-danger">*</span></label>
                     <asp:TextBox ID="txtCode" runat="server" CssClass="form-control m-1"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvCode" runat="server" ErrorMessage="Please Enter State Code" ControlToValidate="txtCode" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
                 <div>
-                    <label class="form-lable m-1">Select Country Name</label>
+                    <label class="form-lable m-1">Select Country Name<span class="text-danger">*</span></label>
                     <asp:DropDownList ID="ddlCountry" runat="server" CssClass="form-select"></asp:DropDownList>
                     <asp:RequiredFieldValidator ID="rfvCountry" runat="server" ErrorMessage="Please Select Country" ControlToValidate="ddlCountry" Display="Dynamic" ForeColor="Red" InitialValue="-1"></asp:RequiredFieldValidator>
                 </div>

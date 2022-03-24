@@ -12,7 +12,7 @@
         <div class="mt-3">
             <form>
                 <div>
-                    <label class="form-lable m-1">Enter Contact Category Name</label>
+                    <label class="form-lable m-1">Enter Contact Category Name<span class="text-danger">*</span></label>
                     <asp:TextBox ID="txtContactCategory" CssClass="form-control m-1" runat="server"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvContactCategory" runat="server" ErrorMessage="Please Enter Contact Category" ControlToValidate="txtContactCategory" Display="Dynamic" ForeColor="Red"></asp:RequiredFieldValidator>
                 </div>
